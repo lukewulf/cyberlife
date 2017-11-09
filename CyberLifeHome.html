@@ -15,10 +15,15 @@
 <textarea id="submitText" placeholder="Enter how ofter you wish to water your plant here ..."></textarea>
 <button id="submitButton" onclick="submitClick()">Submit</button>
 
+
+<h2>Pot Adding Steps</h2>
+<textarea id="pot-id" placeholder="Pot ID"></textarea>
+<button id="add-pot-button">Add Pot</button>
+
 <table>
 	<thead>
 		<tr>
-			<td>Name</td>
+			<td>UID</td>
 			<td>Email</td>
 			<td>Action</td>
 		</tr>
@@ -28,7 +33,9 @@
 	</tbody>
 </table>
 
-<p id="current-user"></p>
+<p id="current-user-name"></p>
+<p id="current-user-email"></p>
+<p id="current-user-id"></p>
 
 
 <!-- Login Page -->
@@ -36,7 +43,7 @@
 <dialog id="login-dialog" class="mdl-dialog">
     <h4 id="signin-banner" class="mdl-dialog__title">CyberLife Sign In</h4>
     <div class="mdl-dialog__content">
-      <p id="login-error"></p>
+      
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" type="text" id="login-email">
         <label class="mdl-textfield__label" for="sample3">Email</label>
@@ -45,6 +52,7 @@
         <input class="mdl-textfield__input" type="password" id="login-password">
         <label class="mdl-textfield__label" for="sample3">Password</label>
       </div>
+      <p id="login-error"></p>
     </div>
     <div class="mdl-dialog__actions">
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="login-button">
@@ -74,10 +82,10 @@
 
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation">
-        <button id="yourPlantsButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        <button id="yourPlantsButton" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored">
     		  Your Plants
     		</button>
-    		<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+    		<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored">
     		  About
     		</button>
         <button id="signin-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
