@@ -21,6 +21,12 @@
 	align-items: center;
 }
 
+#plant-table{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 15%;
+}
 #login-password{
 	text: hidden;
 }
