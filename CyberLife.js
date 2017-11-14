@@ -6,8 +6,10 @@ $(document).ready(function(){
 		var email = snap.child("email").val();
 
 		$("#table_body").append("<tr><td>" + name + "</td><td>" + email + "</td><td><button>Water</button></td></tr>");
-
+		
 	});
+
+
 });
 
 var mainText = document.getElementById("mainText");
@@ -38,6 +40,7 @@ function submitClick(){
 var id;
 var email;
 var registerFlag = false;
+var numDisplayed = 0;
 
 /* Register On Click */
 $("#register-button").click(
@@ -103,7 +106,16 @@ firebase.auth().onAuthStateChanged(function(user) {
     $("#signin-button").hide();
     $("#signout-button").show();
     $("#yourPlantsButton").show();
-    
+
+   	var potRef = firebase.database().ref("Pots/Pot0");
+   	var userPotRef = firebase.database().ref("Users/" + id + "/pots");
+   	userPotRef.on('value', function(snap){
+   		var numPots = snap.val().num;
+   		for(; numDisplayed < numPots; numDisplayed++){
+   			insertRow(0, "ExamplePot");
+   		}
+   	});
+   	//insertRow(0, "poiure");
 
   } else {
 
@@ -189,6 +201,15 @@ $("#add-pot-button").click(
 				potID: potID
 			});
 
+			//num++ within firebase to get the correct number of pots that the user has
+			currentNum = firebase.database().ref('Users/' + id + '/pots/num');
+			currentNum.transaction(function(num){
+				if(num || (num == 0)){
+					num = num + 1;
+				}
+				return num;
+			});
+
 			//Adding Pot to Pot LIst
 			potListRef = firebase.database().ref('Pots');
 			potListRef.child(potID).set({
@@ -209,6 +230,72 @@ $("#add-pot-button").click(
 		}
 
 		//Adding Pot to Pot LIst
-		$("#pot-id").text("");
+		$("#pot-id").val("");
 	}
 );
+
+/* 
+ * Reads the database, then inserts the correct values into the doc
+ * using a helper method addTableRow
+ */
+function insertRow(i, potID){
+	
+	var potRef = firebase.database().ref('Pots/' + potID);
+	potRef.on('value', function(snap){
+		
+		var plantName = snap.val().plantName;
+		var delay = snap.val().delay;
+		var auto = snap.val().autoWater;
+		var lastWatered = snap.val().lastWatered;
+		var waterLevel = snap.val().waterLevel;
+
+		addTableRow(i, plantName, delay, auto, lastWatered, waterLevel);
+	});
+}
+
+/* Helper method to inject the html table row into the document */
+function addTableRow(i, plantName, delay, auto, lastWatered, waterLevel){
+
+	var table = document.getElementById('pot-table-2');
+	var new_row = table.rows[1].cloneNode(true);
+	var len = table.rows.length;
+	var id;
+
+	var inp0 = new_row.cells[0].getElementsByTagName('textarea')[0];
+    inp0.id += len;
+    inp0.value = plantName;
+    id = inp0.id;
+    inp0.for = id;
+
+    var inp1 = new_row.cells[1].getElementsByTagName('textarea')[0];
+    inp1.id += len;
+    inp1.value = delay;
+    id = inp1.id;
+    inp1.for = id;
+
+    var inp2 = new_row.cells[2].getElementsByTagName('input')[0];
+    if(inp2){
+	    inp2.id += len;
+	    inp2.value = auto;
+	    id = inp2.id;
+	    inp2.for = id;
+	}
+
+    var inp3 = new_row.cells[3].getElementsByTagName('p')[0];
+    new_row.cells[3].innerHTML = lastWatered;
+
+    var inp4 = new_row.cells[4].getElementsByTagName('p')[0];
+    new_row.cells[4].innerHTML = waterLevel;
+    
+    var inp5 = new_row.cells[5].getElementsByTagName('button')[0];
+    if(inp5){
+    	inp5.id += len;
+    }
+
+    var inp6 = new_row.cells[6].getElementsByTagName('button')[0];
+    if(inp6){
+    	inp6.id += len;
+    }
+    
+	table.appendChild(new_row);
+}

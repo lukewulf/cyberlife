@@ -33,6 +33,40 @@
 	</tbody>
 </table>
 
+<table id="pot-table-2">
+  <tr>
+      <th>Name</th>
+      <th>Delay</th>
+      <th>Auto</th>
+      <th>Last Watered On</th>
+      <th>Water Level</th>
+      <th>Water</th>
+      <th>Save</th>
+  </tr>
+  <tr>
+    <td>
+      <textarea id="plantName" placeholder="plant name"></textarea>
+    </td>
+    <td>
+      <textarea id="delayTime" placeholder="time delay"></textarea>
+    </td>
+    <td>
+      <label class="switch">
+        <input type="checkbox" id="autoWater" checked>
+        <span class="slider round"></span>
+      </label>
+    </td>
+    <td><p id="lastWatered">Last Watered On<p></td>
+    <td><p id="waterLevel">Water Level</p></td>
+    <td>
+      <button type="button" id="waterBtn">Water</button>
+    </td>
+    <td>
+      <button type="button" id="saveBtn">Save</button>
+    </td>
+  </tr>
+</table>
+
 <p id="current-user-name"></p>
 <p id="current-user-email"></p>
 <p id="current-user-id"></p>
@@ -103,7 +137,7 @@
 </div>
 
 <div id="plant-table">
- <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+ <table id = "pot-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
     <tr>
       <th class="mdl-data-table__cell--non-numeric">Name</th>
@@ -138,12 +172,12 @@
       </td>
       <td>
         <label class="mdl-switch mdl-js-switch" for="switch-1">
-          <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+          <input type="checkbox" id="switch-1" class="mdl-switch__input" id="sample3" checked>
           <span class="mdl-switch__label"></span>
         </label>
       </td>
-      <td>11-8-17 4:14pm</td>
-      <td>High</td>
+      <td id="sample4">11-8-17 4:14pm</td>
+      <td id="sample5">High</td>
       <td>
         <!-- Mini FAB button -->
         <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
@@ -188,6 +222,9 @@
   </tbody>
 </table>
 </div>
+
+
+
 <!-- Firebase Inclusion -->
 <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase-app.js"></script>
