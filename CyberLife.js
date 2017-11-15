@@ -41,6 +41,8 @@ var id;
 var email;
 var registerFlag = false;
 var numDisplayed = 0;
+var potArray = [];
+var saveFlag = false;
 
 /* Register On Click */
 $("#register-button").click(
@@ -106,16 +108,30 @@ firebase.auth().onAuthStateChanged(function(user) {
     $("#signin-button").hide();
     $("#signout-button").show();
     $("#yourPlantsButton").show();
+    $("#pot-table-2").show();
 
    	var potRef = firebase.database().ref("Pots/Pot0");
    	var userPotRef = firebase.database().ref("Users/" + id + "/pots");
-   	userPotRef.on('value', function(snap){
-   		var numPots = snap.val().num;
-   		for(; numDisplayed < numPots; numDisplayed++){
-   			insertRow(0, "ExamplePot");
-   		}
-   	});
-   	//insertRow(0, "poiure");
+   	if(!saveFlag){
+	   	userPotRef.on('value', function(snap){
+
+	   		snap.forEach(function(childSnapshot){
+	   			if(isNaN(childSnapshot.val())){
+	   				//Area to populate snapshot
+	   				//console.log(childSnapshot.val().potID);
+	   				var i = 0;
+	   				for(; i < potArray.length; i++){
+	   					if(potArray[i] == childSnapshot.val().potID){
+	   						return;
+	   					}
+	   				}
+					potArray[potArray.length] = childSnapshot.val().potID;
+	   				insertRow(0, childSnapshot.val().potID);
+	   			}
+	   		});
+	   	});
+   	}
+   	saveFlag = false;
 
   } else {
 
@@ -128,7 +144,9 @@ firebase.auth().onAuthStateChanged(function(user) {
   	$("#yourPlantsButton").hide();
   	id = null;
   	email = null;
- 
+
+	$("#pot-table-2").hide();
+	 
   }
 });
 
@@ -187,43 +205,60 @@ $("#signout-button").click(
 	}
 );
 
-
-
 $("#add-pot-button").click(
 	function(){
 		var potID = $("#pot-id").val();
 
-		
 		if(id){
-			//Adding Pot to User Reference
-			currentUserRef = firebase.database().ref('Users/' + id + '/pots');
-			currentUserRef.child(potID).set({
-				potID: potID
-			});
 
-			//num++ within firebase to get the correct number of pots that the user has
-			currentNum = firebase.database().ref('Users/' + id + '/pots/num');
-			currentNum.transaction(function(num){
-				if(num || (num == 0)){
-					num = num + 1;
-				}
-				return num;
-			});
+			var newPot = true;
+			var userPotRef = firebase.database().ref("Pots");
+	   		userPotRef.on('value', function(snap){
 
-			//Adding Pot to Pot LIst
-			potListRef = firebase.database().ref('Pots');
-			potListRef.child(potID).set({
-				IP: 0,
-				MAC: 0,
-				amountWater: 0,
-				autoWater: false,
-				delay: 0,
-				lastWatered: 0,
-				plantName: 0,
-				moisture: 0,
-				uid: firebase.auth().currentUser.uid,
-				waterLevel: 0
-			});
+		   		snap.forEach(function(childSnapshot){
+		   			if(newPot){
+			   			if(childSnapshot.val().potID == potID){
+			   					newPot = false;
+			   			}
+		   			}
+		   		});
+		   	});
+
+		   	if(!newPot){
+		   		alert("This Pot has already been added");
+		   	}
+		   	else{
+		   		//Adding Pot to User Reference
+				currentUserRef = firebase.database().ref('Users/' + id + '/pots');
+				currentUserRef.child(potID).set({
+					potID: potID
+				});
+
+				//num++ within firebase to get the correct number of pots that the user has
+				currentNum = firebase.database().ref('Users/' + id + '/pots/num');
+				currentNum.transaction(function(num){
+					if(num || (num == 0)){
+						num = num + 1;
+					}
+					return num;
+				});
+
+				//Adding Pot to Pot LIst
+				potListRef = firebase.database().ref('Pots');
+				potListRef.child(potID).set({
+					IP: 0,
+					MAC: 0,
+					amountWater: 0,
+					autoWater: false,
+					delay: 0,
+					lastWatered: 0,
+					plantName: 0,
+					moisture: 0,
+					uid: firebase.auth().currentUser.uid,
+					waterLevel: 0,
+					potID: potID
+				});
+		   	}
 		}
 		else{
 			alert("Please Be Signed In");
@@ -234,27 +269,29 @@ $("#add-pot-button").click(
 	}
 );
 
+
 /* 
  * Reads the database, then inserts the correct values into the doc
  * using a helper method addTableRow
  */
 function insertRow(i, potID){
-	
+
 	var potRef = firebase.database().ref('Pots/' + potID);
 	potRef.on('value', function(snap){
-		
-		var plantName = snap.val().plantName;
-		var delay = snap.val().delay;
-		var auto = snap.val().autoWater;
-		var lastWatered = snap.val().lastWatered;
-		var waterLevel = snap.val().waterLevel;
-
-		addTableRow(i, plantName, delay, auto, lastWatered, waterLevel);
+		if(!saveFlag){
+			var plantName = snap.val().plantName;
+			var delay = snap.val().delay;
+			var auto = snap.val().autoWater;
+			var lastWatered = snap.val().lastWatered;
+			var waterLevel = snap.val().waterLevel;
+			addTableRow(i, plantName, delay, auto, lastWatered, waterLevel, potID);
+		}
+		saveFlag = false;
 	});
 }
 
 /* Helper method to inject the html table row into the document */
-function addTableRow(i, plantName, delay, auto, lastWatered, waterLevel){
+function addTableRow(i, plantName, delay, auto, lastWatered, waterLevel, potID){
 
 	var table = document.getElementById('pot-table-2');
 	var new_row = table.rows[1].cloneNode(true);
@@ -279,6 +316,7 @@ function addTableRow(i, plantName, delay, auto, lastWatered, waterLevel){
 	    inp2.value = auto;
 	    id = inp2.id;
 	    inp2.for = id;
+	    inp2.checked = auto;
 	}
 
     var inp3 = new_row.cells[3].getElementsByTagName('p')[0];
@@ -297,5 +335,40 @@ function addTableRow(i, plantName, delay, auto, lastWatered, waterLevel){
     	inp6.id += len;
     }
     
+    var inp7 = new_row.cells[7].getElementsByTagName('p')[0];
+    if(inp7){
+    	inp7.id += len;
+    	var newID = inp7.id;
+    }
+    new_row.cells[7].innerHTML = "<p id=\"" + newID + "\">" + potID + "</p>";
+
 	table.appendChild(new_row);
+}
+
+function saveState(btnID){
+	var index = btnID.slice(7, btnID.length);
+	var potID = ("#potUID" + index);
+	var delayID = ("#delayTime" + index);
+	var plantID = ("#plantName" + index);
+	var checkID = ("#autoWater" + index);
+	saveFlag = true;
+
+	var pot = $(potID).text();
+	potListRef = firebase.database().ref('Pots');
+	potListRef.child(pot).update({
+		plantName: $(plantID).val(),
+		delay: $(delayID).val(),
+		autoWater: $(checkID).val()
+	});
+
+}
+
+function waterPlant(btnID){
+	var index = btnID.slice(8, btnID.length);
+	
+	var potID = ("potUID" + index);
+
+
+	alert(btnID.slice($("#" + potID).val()));
+
 }

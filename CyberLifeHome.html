@@ -34,37 +34,45 @@
 </table>
 
 <table id="pot-table-2">
-  <tr>
-      <th>Name</th>
-      <th>Delay</th>
-      <th>Auto</th>
-      <th>Last Watered On</th>
-      <th>Water Level</th>
-      <th>Water</th>
-      <th>Save</th>
-  </tr>
-  <tr>
-    <td>
-      <textarea id="plantName" placeholder="plant name"></textarea>
-    </td>
-    <td>
-      <textarea id="delayTime" placeholder="time delay"></textarea>
-    </td>
-    <td>
-      <label class="switch">
-        <input type="checkbox" id="autoWater" checked>
-        <span class="slider round"></span>
-      </label>
-    </td>
-    <td><p id="lastWatered">Last Watered On<p></td>
-    <td><p id="waterLevel">Water Level</p></td>
-    <td>
-      <button type="button" id="waterBtn">Water</button>
-    </td>
-    <td>
-      <button type="button" id="saveBtn">Save</button>
-    </td>
-  </tr>
+
+    <tr>
+        <th>Name</th>
+        <th>Delay</th>
+        <th>Auto</th>
+        <th>Last Watered On</th>
+        <th>Water Level</th>
+        <th>Water</th>
+        <th>Save</th>
+        <th class="tableID">Pot ID</th>
+    </tr>
+
+  
+    <tr>
+      <td>
+        <textarea id="plantName" placeholder="plant name"></textarea>
+      </td>
+      <td>
+        <textarea id="delayTime" placeholder="time delay"></textarea>
+      </td>
+      <td>
+        <label class="switch">
+          <input type="checkbox" id="autoWater">
+          <span class="slider round"></span>
+        </label>
+      </td>
+      <td><p id="lastWatered">Last Watered On<p></td>
+      <td><p id="waterLevel">Water Level</p></td>
+      <td>
+        <button type="button" id="waterBtn" onclick="waterPlant(this.id)">Water</button>
+      </td>
+      <td>
+        <button class="saveBtn" type="button" id="saveBtn" onclick="saveState(this.id)">Save</button>
+      </td>
+      <td class="tableID">
+        <p class= "tableID" id="potUID">Pot-ID-Example</p>
+      </td>
+    </tr>
+
 </table>
 
 <p id="current-user-name"></p>
