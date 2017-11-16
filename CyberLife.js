@@ -112,26 +112,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 
    	var potRef = firebase.database().ref("Pots/Pot0");
    	var userPotRef = firebase.database().ref("Users/" + id + "/pots");
-   	if(!saveFlag){
-	   	userPotRef.on('value', function(snap){
-
-	   		snap.forEach(function(childSnapshot){
-	   			if(isNaN(childSnapshot.val())){
-	   				//Area to populate snapshot
-	   				//console.log(childSnapshot.val().potID);
-	   				var i = 0;
-	   				for(; i < potArray.length; i++){
-	   					if(potArray[i] == childSnapshot.val().potID){
-	   						return;
-	   					}
-	   				}
-					potArray[potArray.length] = childSnapshot.val().potID;
-	   				insertRow(0, childSnapshot.val().potID);
-	   			}
-	   		});
-	   	});
-   	}
-   	saveFlag = false;
+   	savePreferences(userPotRef);
+   	$("#hidden").hide();
+   	//$("#placeholder-header").hide();
 
   } else {
 
@@ -150,6 +133,25 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+function savePreferences(userPotRef){
+	userPotRef.on('value', function(snap){
+
+	   		snap.forEach(function(childSnapshot){
+	   			if(isNaN(childSnapshot.val())){
+	   				//Area to populate snapshot
+	   				//console.log(childSnapshot.val().potID);
+	   				var i = 0;
+	   				for(; i < potArray.length; i++){
+	   					if(potArray[i] == childSnapshot.val().potID){
+	   						return;
+	   					}
+	   				}
+					potArray[potArray.length] = childSnapshot.val().potID;
+	   				insertRow(childSnapshot.val().potID);
+	   			}
+	   		});
+	});
+}
 /*login-onCLick */
 $("#login-button").click(
 	function(){
@@ -164,7 +166,7 @@ $("#login-button").click(
 
 				//Sign In Function
 				firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error){
-
+					firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 					//Reset Login Page
 					$("#login-error").show().text(error.message);
 					$("#login-progress").hide();
@@ -211,24 +213,89 @@ $("#add-pot-button").click(
 
 		if(id){
 
+			var found = false;
+			var userPotRef = firebase.database().ref("Pots");
+	   		userPotRef.on('value', function(snap){
+
+		   		snap.forEach(function(childSnapshot){
+		   			console.log("test");
+		   			if(!found){
+			   			if(childSnapshot.val().potID == potID){
+			   					found = true;
+			   			}
+		   			}
+		   		});
+		   	});
+
+		   	if(found){
+		   		console.log("Found");
+		   		var increment = true;
+		   		var repeatPot = false;
+		   		var i = 0;
+		   		for(; i < potArray.length; i++){
+		   			if(potArray[i] == potID){
+		   				alert("Found Repeat Pot");
+		   				repeatPot = true;
+		   			}
+		   		}
+		   		if(!repeatPot){
+			   		var userPotList = firebase.database().ref('Users/' + id + '/pots');
+			   		var potRef = firebase.database().ref('Pots/' + potID);
+
+			   		//Adding uid to pot
+			   		potRef.update({uid: id});
+
+			   		//Adding pot to user
+			   		userPotList.child(potID).set({
+			   			potID: potID
+			   		});
+
+			   		//num++ within firebase to get the correct number of pots that the user has
+					currentNum = firebase.database().ref('Users/' + id + '/pots/num');
+					currentNum.transaction(function(num){
+						if(increment){
+							if(num || (num == 0)){
+								num = num + 1;
+							}
+							return num;
+						}
+						increment = false;
+					});		   			
+		   		}
+		   	}
+		   	else{
+		   		alert("Please connect the pot to the internet");
+		   	}
+		}
+		else{
+			alert("Please Be Signed In");
+		}
+
+		//Adding Pot to Pot LIst
+		$("#pot-id").val("");
+	}
+);
+
+$("#dummy-add").click(function(){
+
+		if(id){
+
+			var potID = $("#pot-id").val();
 			var newPot = true;
 			var userPotRef = firebase.database().ref("Pots");
 	   		userPotRef.on('value', function(snap){
 
 		   		snap.forEach(function(childSnapshot){
 		   			if(newPot){
+		   				//console.log(childSnapshot.val().potID);
 			   			if(childSnapshot.val().potID == potID){
 			   					newPot = false;
 			   			}
 		   			}
 		   		});
 		   	});
-
-		   	if(!newPot){
-		   		alert("This Pot has already been added");
-		   	}
-		   	else{
-		   		//Adding Pot to User Reference
+		   	if(newPot){
+				//Adding Pot to User Reference
 				currentUserRef = firebase.database().ref('Users/' + id + '/pots');
 				currentUserRef.child(potID).set({
 					potID: potID
@@ -257,24 +324,22 @@ $("#add-pot-button").click(
 					uid: firebase.auth().currentUser.uid,
 					waterLevel: 0,
 					potID: potID
-				});
+				});		   		
 		   	}
+			else{
+		   		alert("Pot is already created");
+			}
 		}
 		else{
-			alert("Please Be Signed In");
+			alert("Please be signed in");
 		}
-
-		//Adding Pot to Pot LIst
-		$("#pot-id").val("");
-	}
-);
-
+});
 
 /* 
  * Reads the database, then inserts the correct values into the doc
  * using a helper method addTableRow
  */
-function insertRow(i, potID){
+function insertRow(potID){
 
 	var potRef = firebase.database().ref('Pots/' + potID);
 	potRef.on('value', function(snap){
@@ -284,14 +349,14 @@ function insertRow(i, potID){
 			var auto = snap.val().autoWater;
 			var lastWatered = snap.val().lastWatered;
 			var waterLevel = snap.val().waterLevel;
-			addTableRow(i, plantName, delay, auto, lastWatered, waterLevel, potID);
+			addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID);
 		}
 		saveFlag = false;
 	});
 }
 
 /* Helper method to inject the html table row into the document */
-function addTableRow(i, plantName, delay, auto, lastWatered, waterLevel, potID){
+function addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID){
 
 	var table = document.getElementById('pot-table-2');
 	var new_row = table.rows[1].cloneNode(true);
@@ -358,7 +423,7 @@ function saveState(btnID){
 	potListRef.child(pot).update({
 		plantName: $(plantID).val(),
 		delay: $(delayID).val(),
-		autoWater: $(checkID).val()
+		autoWater: $(checkID).is(':checked')
 	});
 
 }

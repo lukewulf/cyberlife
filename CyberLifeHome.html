@@ -11,6 +11,9 @@
 </head>
 <body>
 
+<a href="CyberLifeAbout.html">About</a>
+<button id="dummy-add">Add Dummy Pot</button>
+
 <h1 id="mainText"> This is some text </h1>
 <textarea id="submitText" placeholder="Enter how ofter you wish to water your plant here ..."></textarea>
 <button id="submitButton" onclick="submitClick()">Submit</button>
@@ -43,10 +46,10 @@
         <th>Water Level</th>
         <th>Water</th>
         <th>Save</th>
-        <th class="tableID">Pot ID</th>
+        <th id="placeholder-header">Pot ID</th>
     </tr>
 
-  
+    <div id="hidden">
     <tr>
       <td>
         <textarea id="plantName" placeholder="plant name"></textarea>
@@ -72,6 +75,7 @@
         <p class= "tableID" id="potUID">Pot-ID-Example</p>
       </td>
     </tr>
+    </div>
 
 </table>
 
