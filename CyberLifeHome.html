@@ -3,7 +3,8 @@
 <head>
 	<title>CyberLife</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-green.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 	<!-- Main Stylesheet -->
@@ -44,44 +45,6 @@
 <p id="current-user-id"></p>
 
 
-  <table id="pot-table-2">
-    <tr>
-        <th>Name</th>
-        <th>Delay</th>
-        <th>Auto</th>
-        <th>Last Watered On</th>
-        <th>Water Level</th>
-        <th>Water</th>
-        <th>Save</th>
-        <th id="placeholder-header">Pot ID</th>
-    </tr>
-  
-    <tr id="hidden">
-      <td>
-        <textarea id="plantName" placeholder="plant name"></textarea>
-      </td>
-      <td>
-        <textarea id="delayTime" placeholder="time delay"></textarea>
-      </td>
-      <td>
-        <label class="switch">
-          <input type="checkbox" id="autoWater">
-          <span class="slider round"></span>
-        </label>
-      </td>
-      <td><p id="lastWatered">Last Watered On<p></td>
-      <td><p id="waterLevel">Water Level</p></td>
-      <td>
-        <button type="button" id="waterBtn" onclick="waterPlant(this.id)">Water</button>
-      </td>
-      <td>
-        <button class="saveBtn" type="button" id="saveBtn" onclick="saveState(this.id)">Save</button>
-      </td>
-      <td class="tableID">
-        <p class= "tableID" id="potUID">Pot-ID-Example</p>
-      </td>
-    </tr> 
-</table>
 
 <!-- Login Page -->
 
@@ -150,6 +113,46 @@
         <a class="mdl-navigation__link" href="CyberLifeAbout.html">About</a>
       </nav>
   </div>
+  <div id="tableContainer">
+    <table id="pot-table-2">
+      <tr>
+          <th>Name</th>
+          <th>Delay</th>
+          <th>Auto</th>
+          <th>Last Watered On</th>
+          <th>Water Level</th>
+          <th>Water</th>
+          <th>Save</th>
+          <th id="placeholder-header">Pot ID</th>
+      </tr>
+    
+      <tr id="hidden">
+        <td>
+          <textarea id="plantName" placeholder="plant name"></textarea>
+        </td>
+        <td>
+          <textarea id="delayTime" placeholder="time delay"></textarea>
+        </td>
+        <td>
+          <label class="container">
+            <input type="checkbox" id="autoWater">
+            <span class="checkmark"></span>
+          </label>
+        </td>
+        <td><p id="lastWatered">Last Watered On<p></td>
+        <td><p id="waterLevel">Water Level</p></td>
+        <td>
+          <button type="button" class="tableBtn" id="waterBtn" onclick="waterPlant(this.id)">Water</button>
+        </td>
+        <td>
+          <button class="saveBtn, tableBtn" type="button" id="saveBtn" onclick="saveState(this.id)">Save</button>
+        </td>
+        <td class="tableID">
+          <p class= "tableID" id="potUID">Pot-ID-Example</p>
+        </td>
+      </tr> 
+      </table>
+    </div>
 </div>
 
 
