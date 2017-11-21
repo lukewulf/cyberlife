@@ -43,6 +43,7 @@ var registerFlag = false;
 var numDisplayed = 0;
 var potArray = [];
 var saveFlag = false;
+var firstTry = true;
 
 /* Register On Click */
 $("#register-button").click(
@@ -276,6 +277,72 @@ $("#add-pot-button").click(
 	}
 );
 
+function addPot(){
+	var potID = $("#pot-id").val();
+
+		if(id){
+
+			var found = false;
+			var userPotRef = firebase.database().ref("Pots");
+	   		userPotRef.on('value', function(snap){
+
+		   		snap.forEach(function(childSnapshot){
+		   			console.log("test");
+		   			if(!found){
+			   			if(childSnapshot.val().potID == potID){
+			   					found = true;
+			   			}
+		   			}
+		   		});
+		   	});
+
+		   	if(found){
+		   		console.log("Found");
+		   		var increment = true;
+		   		var repeatPot = false;
+		   		var i = 0;
+		   		for(; i < potArray.length; i++){
+		   			if(potArray[i] == potID){
+		   				alert("Found Repeat Pot");
+		   				repeatPot = true;
+		   			}
+		   		}
+		   		if(!repeatPot){
+			   		var userPotList = firebase.database().ref('Users/' + id + '/pots');
+			   		var potRef = firebase.database().ref('Pots/' + potID);
+
+			   		//Adding uid to pot
+			   		potRef.update({uid: id});
+
+			   		//Adding pot to user
+			   		userPotList.child(potID).set({
+			   			potID: potID
+			   		});
+
+			   		//num++ within firebase to get the correct number of pots that the user has
+					currentNum = firebase.database().ref('Users/' + id + '/pots/num');
+					currentNum.transaction(function(num){
+						if(increment){
+							if(num || (num == 0)){
+								num = num + 1;
+							}
+							return num;
+						}
+						increment = false;
+					});		   			
+		   		}
+		   	}
+		   	else{
+		   		alert("Please connect the pot to the internet");
+		   	}
+		}
+		else{
+			alert("Please Be Signed In");
+		}
+
+		//Adding Pot to Pot LIst
+		$("#pot-id").val("");
+}
 $("#dummy-add").click(function(){
 
 		if(id){

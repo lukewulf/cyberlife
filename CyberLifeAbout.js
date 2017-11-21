@@ -1,3 +1,9 @@
 var user = firebase.auth().currentUser;
 
-alert(user.uid);
+try{
+	var name = user.uid;
+	$('#uid').text(name);
+}catch(e){
+	$('#uid').text(e);
+}
+

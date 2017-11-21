@@ -59,6 +59,8 @@
 	text-align: center;
 }
 
+#pot-table-2 tr:nth-child(odd) {background-color: white;}
+
 #pot-table-2 tr:nth-child(even) {background-color: #f2f2f2;}
 
 #pot-table-2 td{
@@ -160,10 +162,16 @@
 /* End checkmark styling */
 
 #tableContainer{
-	width: 100%;
 	display: flex;
-	margin-top: 100px;
+	margin-top: 300px;
 	justify-content: center;
 	align-items: center;
 	z-index: 1;
+	/*background: white;*/
+}
+
+.background{
+	background: url('http://c2.peakpx.com/wallpaper/261/792/19/5k-botanical-minimal-potted-wallpaper.jpg');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
 }

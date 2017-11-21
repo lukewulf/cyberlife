@@ -4,16 +4,57 @@
 	<head>
 		<title>About</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+		<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-green.min.css" />
 		<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 		<!-- Main Stylesheet -->
 		<link rel="stylesheet" type="text/css" href="CyberLifeHome.css">
+		<link rel="stylesheet" type="text/css" href="CyberLifeAbout.css">
+
 	</head>
 
 	<body>
 		<a href="CyberLifeHome.html">Back To Home</a>
 
+		<p id="uid">Nothing Here</p>
+
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header, background">
+		  <header class="mdl-layout__header">
+		    <div class="mdl-layout-icon"></div>
+		    <div class="mdl-layout__header-row">
+		      <span class="mdl-layout__title">CyberLife</span>
+		      <span class="page-title-span"> | </span>
+		      <span class="mdl-layout__title"> About </span>
+
+		     
+		      <div class="mdl-layout-spacer"></div>
+		      <nav class="mdl-navigation">
+		        <button id="yourPlantsButton" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored">
+		    		  Your Plants
+		    		</button>
+		    		<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored">
+		    		  Home
+		    		</button>
+		        <button id="signin-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+		          Sign In
+		        </button>
+		    		<button id="signout-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+		    		  Sign Out
+		          <i id="button-right-icon" class="material-icons">account_circle</i>
+		    		</button>
+		      </nav>
+		    </div>
+		  </header>
+		  <div class="mdl-layout__drawer">
+		      <span class="mdl-layout-title">CyberLife</span>
+		     <nav class="mdl-navigation mdl-layout--large-screen-only">
+		        <a class="mdl-navigation__link" href="CyberLifeAbout.html">About</a>
+		      </nav>
+		  </div>
+		  <div id="rightColumn">
+		  	<p id="about">What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I’m the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You’re fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that’s just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little “clever” comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn’t, you didn’t, and now you’re paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You’re fucking dead, kiddo.</p>
+		</div>
+	</div>
 
 		<!-- Firebase Inclusion -->
 		<script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
