@@ -13,6 +13,7 @@
 
 <a href="CyberLifeAbout.html">About</a>
 <button id="dummy-add">Add Dummy Pot</button>
+<button id="aboutPage">To About Page</button>
 
 <h1 id="mainText"> This is some text </h1>
 <textarea id="submitText" placeholder="Enter how ofter you wish to water your plant here ..."></textarea>
@@ -36,8 +37,14 @@
 	</tbody>
 </table>
 
-<table id="pot-table-2">
 
+
+<p id="current-user-name"></p>
+<p id="current-user-email"></p>
+<p id="current-user-id"></p>
+
+
+  <table id="pot-table-2">
     <tr>
         <th>Name</th>
         <th>Delay</th>
@@ -48,9 +55,8 @@
         <th>Save</th>
         <th id="placeholder-header">Pot ID</th>
     </tr>
-
-    <div id="hidden">
-    <tr>
+  
+    <tr id="hidden">
       <td>
         <textarea id="plantName" placeholder="plant name"></textarea>
       </td>
@@ -74,15 +80,8 @@
       <td class="tableID">
         <p class= "tableID" id="potUID">Pot-ID-Example</p>
       </td>
-    </tr>
-    </div>
-
+    </tr> 
 </table>
-
-<p id="current-user-name"></p>
-<p id="current-user-email"></p>
-<p id="current-user-id"></p>
-
 
 <!-- Login Page -->
 
@@ -118,7 +117,7 @@
 
 <!-- Main Page -->
 
-<div class="mdl-layout mdl-js-layout">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout-icon"></div>
     <div class="mdl-layout__header-row">
@@ -126,6 +125,7 @@
       <span class="page-title-span"> | </span>
       <span class="mdl-layout__title"> Home </span>
 
+     
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation">
         <button id="yourPlantsButton" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored">
@@ -145,94 +145,17 @@
     </div>
   </header>
   <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">CyberLife</span>
+     <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <a class="mdl-navigation__link" href="CyberLifeAbout.html">About</a>
+      </nav>
   </div>
 </div>
 
+
+
 <div id="plant-table">
- <table id = "pot-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-  <thead>
-    <tr>
-      <th class="mdl-data-table__cell--non-numeric">Name</th>
-      <th class="mdl-data-table__cell--non-numeric">Delay</th>
-      <th>Auto</th>
-      <th>Last Watered On</th>
-      <th>Water Level</th>
-      <th>Water</th>
-      <th>Save</th>
-    </tr>
-  </thead>
-  <tbody id="plant-table-body">
-    <tr>
-      <td>
-        <!-- Simple Textfield -->
-        <form action="#">
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" id="sample1">
-            <label class="mdl-textfield__label" for="sample1">Name Of Plant</label>
-          </div>
-        </form>
-      </td>
-      <td>
-        <!-- Numeric Textfield -->
-        <form action="#">
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample2">
-            <label class="mdl-textfield__label" for="sample2">Delay In Minutes</label>
-            <span class="mdl-textfield__error">Input is not a number!</span>
-          </div>
-        </form>
-      </td>
-      <td>
-        <label class="mdl-switch mdl-js-switch" for="switch-1">
-          <input type="checkbox" id="switch-1" class="mdl-switch__input" id="sample3" checked>
-          <span class="mdl-switch__label"></span>
-        </label>
-      </td>
-      <td id="sample4">11-8-17 4:14pm</td>
-      <td id="sample5">High</td>
-      <td>
-        <!-- Mini FAB button -->
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
-          <i class="material-icons">invert_colors</i>
-        </button>
-      </td>
-      <td>
-        <!-- Mini FAB button -->
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect">
-          <i class="material-icons">get_app</i>
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
-      <td>
-        <!-- Numeric Textfield -->
-        <form action="#">
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample2">
-            <label class="mdl-textfield__label" for="sample2">Delay In Minutes</label>
-            <span class="mdl-textfield__error">Input is not a number!</span>
-          </div>
-        </form>
-      </td>
-      <td>$1.25</td>
-    </tr>
-    <tr>
-      <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
-      <td>
-        <!-- Numeric Textfield -->
-        <form action="#">
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample2">
-            <label class="mdl-textfield__label" for="sample2">Delay In Minutes</label>
-            <span class="mdl-textfield__error">Input is not a number!</span>
-          </div>
-        </form>
-      </td>
-      <td>$2.35</td>
-    </tr>
-  </tbody>
-</table>
+
 </div>
 
 

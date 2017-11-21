@@ -113,7 +113,7 @@ firebase.auth().onAuthStateChanged(function(user) {
    	var potRef = firebase.database().ref("Pots/Pot0");
    	var userPotRef = firebase.database().ref("Users/" + id + "/pots");
    	savePreferences(userPotRef);
-   	$("#hidden").hide();
+   	//$("table tr:nth-child(2)").remove();
    	//$("#placeholder-header").hide();
 
   } else {
@@ -363,6 +363,9 @@ function addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID){
 	var len = table.rows.length;
 	var id;
 
+	new_row.id += len;
+	console.log(new_row.id);
+
 	var inp0 = new_row.cells[0].getElementsByTagName('textarea')[0];
     inp0.id += len;
     inp0.value = plantName;
@@ -437,3 +440,7 @@ function waterPlant(btnID){
 	alert(btnID.slice($("#" + potID).val()));
 
 }
+
+$("#aboutPage").click(function(){
+	window.location = 'CyberLifeAbout.html';
+})
