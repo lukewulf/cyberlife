@@ -44,6 +44,7 @@ var numDisplayed = 0;
 var potArray = [];
 var saveFlag = false;
 var firstTry = true;
+var ids = ['null'];
 
 /* Register On Click */
 $("#register-button").click(
@@ -430,75 +431,122 @@ $("#dummy-add").click(function(){
 function insertRow(potID){
 
 	var potRef = firebase.database().ref('Pots/' + potID);
+
 	potRef.on('value', function(snap){
 		if(!saveFlag){
-			var plantName = snap.val().plantName;
-			var delay = snap.val().delay;
-			var auto = snap.val().autoWater;
-			var lastWatered = snap.val().lastWatered;
-			var waterLevel = snap.val().waterLevel;
-			addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID);
+			var previouslyInserted = false;
+			var repeatID;
+			for(var i = 0; i < ids.length; i++){
+				if(potID === ids[i]){
+					previouslyInserted = true;
+					repeatID = potID;
+				}
+			}
+			if(!previouslyInserted){
+				var plantName = snap.val().plantName;
+				var delay = snap.val().delay;
+				var auto = snap.val().autoWater;
+				var lastWatered = snap.val().lastWatered;
+				var waterLevel = snap.val().waterLevel;
+				ids.push(potID);
+				addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID);
+			}
+			else{
+				console.log("found repeat plant");
+				updateTableRow(repeatID);
+			}
 		}
 		saveFlag = false;
 	});
 }
 
+function updateTableRow(repeatID){
+		var table = document.getElementById('pot-table-2');
+		console.log(table.rows.length);
+		for(var i = 0; i < table.rows.length; i++){
+			if(repeatID === table.rows[i].cells[7].innerText){
+				var potRef = firebase.database().ref('Pots/' + repeatID);
+				potRef.once('value', function(snap){
+					var plantName = snap.val().plantName;
+					var delay = snap.val().delay;
+					var auto = snap.val().autoWater;
+					var lastWatered = snap.val().lastWatered;
+					var waterLevel = snap.val().waterLevel;
+
+					var editRow = table.rows[i];
+					editRow.cells[0].innerText = plantName;
+					editRow.cells[1].innerText = delay;
+
+					var inp2 = editRow.cells[2].getElementsByTagName('input')[0];
+					if(inp2){
+						inp2.checked = auto;
+					}
+
+					editRow.cells[3].innerText = lastWatered;
+					editRow.cells[4].innerText = waterLevel;
+				});
+				return;
+			}
+		}
+}
 /* Helper method to inject the html table row into the document */
 function addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID){
 
-	var table = document.getElementById('pot-table-2');
-	var new_row = table.rows[1].cloneNode(true);
-	var len = table.rows.length;
-	var id;
 
-	new_row.id += len;
-	console.log(new_row.id);
+		var table = document.getElementById('pot-table-2');
+		var new_row = table.rows[1].cloneNode(true);
+		var len = table.rows.length;
+		var id;
 
-	var inp0 = new_row.cells[0].getElementsByTagName('textarea')[0];
-    inp0.id += len;
-    inp0.value = plantName;
-    id = inp0.id;
-    inp0.for = id;
+		new_row.id += len;
+		console.log(new_row.id);
 
-    var inp1 = new_row.cells[1].getElementsByTagName('textarea')[0];
-    inp1.id += len;
-    inp1.value = delay;
-    id = inp1.id;
-    inp1.for = id;
+		var inp0 = new_row.cells[0].getElementsByTagName('textarea')[0];
+	    inp0.id += len;
+	    inp0.value = plantName;
+	    id = inp0.id;
+	    inp0.for = id;
 
-    var inp2 = new_row.cells[2].getElementsByTagName('input')[0];
-    if(inp2){
-	    inp2.id += len;
-	    inp2.value = auto;
-	    id = inp2.id;
-	    inp2.for = id;
-	    inp2.checked = auto;
-	}
+	    var inp1 = new_row.cells[1].getElementsByTagName('textarea')[0];
+	    inp1.id += len;
+	    inp1.value = delay;
+	    id = inp1.id;
+	    inp1.for = id;
 
-    var inp3 = new_row.cells[3].getElementsByTagName('p')[0];
-    new_row.cells[3].innerHTML = lastWatered;
+	    var inp2 = new_row.cells[2].getElementsByTagName('input')[0];
+	    if(inp2){
+		    inp2.id += len;
+		    inp2.value = auto;
+		    id = inp2.id;
+		    inp2.for = id;
+		    inp2.checked = auto;
+		}
 
-    var inp4 = new_row.cells[4].getElementsByTagName('p')[0];
-    new_row.cells[4].innerHTML = waterLevel;
-    
-    var inp5 = new_row.cells[5].getElementsByTagName('button')[0];
-    if(inp5){
-    	inp5.id += len;
-    }
+	    var inp3 = new_row.cells[3].getElementsByTagName('p')[0];
+	    new_row.cells[3].innerHTML = lastWatered;
 
-    var inp6 = new_row.cells[6].getElementsByTagName('button')[0];
-    if(inp6){
-    	inp6.id += len;
-    }
-    
-    var inp7 = new_row.cells[7].getElementsByTagName('p')[0];
-    if(inp7){
-    	inp7.id += len;
-    	var newID = inp7.id;
-    }
-    new_row.cells[7].innerHTML = "<p id=\"" + newID + "\">" + potID + "</p>";
+	    var inp4 = new_row.cells[4].getElementsByTagName('p')[0];
+	    new_row.cells[4].innerHTML = waterLevel;
+	    
+	    var inp5 = new_row.cells[5].getElementsByTagName('button')[0];
+	    if(inp5){
+	    	inp5.id += len;
+	    }
 
-	table.appendChild(new_row);
+	    var inp6 = new_row.cells[6].getElementsByTagName('button')[0];
+	    if(inp6){
+	    	inp6.id += len;
+	    }
+	    
+	    var inp7 = new_row.cells[7].getElementsByTagName('p')[0];
+	    if(inp7){
+	    	inp7.id += len;
+	    	var newID = inp7.id;
+	    }
+	    new_row.cells[7].innerHTML = "<p id=\"" + newID + "\">" + potID + "</p>";
+
+		table.appendChild(new_row);
+
 }
 
 function saveState(btnID){
