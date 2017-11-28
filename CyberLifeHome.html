@@ -124,10 +124,11 @@
             <th>Delay</th>
             <th>Auto</th>
             <th>Last Watered On</th>
-            <th>Water Level</th>
+            <th>Moisture</th>
             <th>Water</th>
             <th>Save</th>
             <th id="placeholder-header" class="tableID">Pot ID</th>
+            <th>Lights On</th>
         </tr>
       
         <tr id="hidden">
@@ -144,7 +145,7 @@
             </label>
           </td>
           <td><p id="lastWatered">Last Watered On<p></td>
-          <td><p id="waterLevel">Water Level</p></td>
+          <td><p id="waterLevel">Moisture Level</p></td>
           <td>
             <button type="button" class="tableBtn" id="waterBtn" onclick="waterPlant(this.id)">Water</button>
           </td>
@@ -153,6 +154,12 @@
           </td>
           <td class="tableID">
             <p class= "tableID" id="potUID">Pot-ID-Example</p>
+          </td>
+          <td>
+            <label class="container">
+              <input type="checkbox" id="ledOn" onchange="lightsOn(this.id)">
+              <span class="checkmark"></span>
+            </label>
           </td>
         </tr> 
         </table>

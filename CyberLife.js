@@ -430,6 +430,8 @@ $("#dummy-add").click(function(){
  */
 function insertRow(potID){
 
+	//console.log("insertRow called: " + potID);
+
 	var potRef = firebase.database().ref('Pots/' + potID);
 
 	potRef.on('value', function(snap){
@@ -449,8 +451,9 @@ function insertRow(potID){
 				var lastWatered = snap.val().lastWatered;
 				var time = new Date(lastWatered * 1000);
 				var waterLevel = snap.val().waterLevel;
+				var ledState = snap.val().led_state;
 				ids.push(potID);
-				addTableRow(plantName, delay, auto, time.toLocaleString(), waterLevel, potID);
+				addTableRow(plantName, delay, auto, time.toLocaleString(), waterLevel, potID, ledState);
 			}
 			else{
 				console.log("found repeat plant");
@@ -471,9 +474,10 @@ function updateTableRow(repeatID){
 					var plantName = snap.val().plantName;
 					var delay = snap.val().delay;
 					var auto = snap.val().autoWater;
-					var lastWatered = snap.val().lastWatered;
+					var lastWatered = snap.val().moisture;
 					var time = new Date(lastWatered * 1000);
-					var waterLevel = snap.val().waterLevel;
+					var waterLevel = snap.val().moisture;
+					var ledState = snap.val().led_state;
 
 					var editRow = table.rows[i];
 					var inp0 = editRow.cells[0].getElementsByTagName('textarea')[0];
@@ -490,13 +494,17 @@ function updateTableRow(repeatID){
 
 					editRow.cells[3].innerText = time.toLocaleString();
 					editRow.cells[4].innerText = waterLevel;
+					var inp8 = editRow.cells[8].getElementsByTagName('input')[0];
+					if(inp8){
+						inp8.checked = ledState;
+					}
 				});
 				return;
 			}
 		}
 }
 /* Helper method to inject the html table row into the document */
-function addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID){
+function addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID, ledState){
 
 
 		var table = document.getElementById('pot-table-2');
@@ -551,6 +559,15 @@ function addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID){
 	    }
 	    new_row.cells[7].innerHTML = "<p id=\"" + newID + "\">" + potID + "</p>";
 
+	    var inp8 = new_row.cells[8].getElementsByTagName('input')[0];
+	    if(inp8){
+		    inp8.id += len;
+		    inp8.value = ledState;
+		    id = inp8.id;
+		    inp8.for = id;
+		    inp8.checked = ledState;
+		}
+
 		table.appendChild(new_row);
 
 }
@@ -585,7 +602,19 @@ function waterPlant(btnID){
 	});
 
 	//alert(btnID.slice($("#" + potID).val()));
+}
 
+function lightsOn(btnID){
+	
+	var index = btnID.slice(5, btnID.length);
+	var potID = ("#potUID" + index);
+	var pot= $(potID).text();
+	console.log(pot);
+
+	potListRef = firebase.database().ref('Pots');
+	potListRef.child(pot).update({
+		led_state: $("#" + btnID).is(":checked")
+	});
 }
 
 $("#aboutPage").click(function(){
