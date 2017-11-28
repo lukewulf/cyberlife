@@ -447,9 +447,10 @@ function insertRow(potID){
 				var delay = snap.val().delay;
 				var auto = snap.val().autoWater;
 				var lastWatered = snap.val().lastWatered;
+				var time = new Date(lastWatered * 1000);
 				var waterLevel = snap.val().waterLevel;
 				ids.push(potID);
-				addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID);
+				addTableRow(plantName, delay, auto, time.toLocaleString(), waterLevel, potID);
 			}
 			else{
 				console.log("found repeat plant");
@@ -471,18 +472,23 @@ function updateTableRow(repeatID){
 					var delay = snap.val().delay;
 					var auto = snap.val().autoWater;
 					var lastWatered = snap.val().lastWatered;
+					var time = new Date(lastWatered * 1000);
 					var waterLevel = snap.val().waterLevel;
 
 					var editRow = table.rows[i];
-					editRow.cells[0].innerText = plantName;
-					editRow.cells[1].innerText = delay;
+					var inp0 = editRow.cells[0].getElementsByTagName('textarea')[0];
+					inp0.value = plantName;
+
+					var inp1 = editRow.cells[1].getElementsByTagName('textarea')[0];
+					inp1.value = delay;
+					
 
 					var inp2 = editRow.cells[2].getElementsByTagName('input')[0];
 					if(inp2){
 						inp2.checked = auto;
 					}
 
-					editRow.cells[3].innerText = lastWatered;
+					editRow.cells[3].innerText = time.toLocaleString();
 					editRow.cells[4].innerText = waterLevel;
 				});
 				return;
@@ -570,10 +576,15 @@ function saveState(btnID){
 function waterPlant(btnID){
 	var index = btnID.slice(8, btnID.length);
 	
-	var potID = ("potUID" + index);
+	var potID = ("#potUID" + index);
+	var pot= $(potID).text();
 
+	potListRef = firebase.database().ref('Pots');
+	potListRef.child(pot).update({
+		water_now: true
+	});
 
-	alert(btnID.slice($("#" + potID).val()));
+	//alert(btnID.slice($("#" + potID).val()));
 
 }
 
