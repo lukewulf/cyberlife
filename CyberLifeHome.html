@@ -14,7 +14,6 @@
 
 <a href="CyberLifeAbout.html">About</a>
 <button id="dummy-add">Add Dummy Pot</button>
-<button id="aboutPage">To About Page</button>
 
 <h1 id="mainText"> This is some text </h1>
 <textarea id="submitText" placeholder="Enter how ofter you wish to water your plant here ..."></textarea>
@@ -22,8 +21,7 @@
 
 
 <h2>Pot Adding Steps</h2>
-<textarea id="pot-id" placeholder="Pot ID"></textarea>
-<button id="add-pot-button" onClick="addPot()">Add Pot</button>
+
 
 <table>
 	<thead>
@@ -86,15 +84,18 @@
     <div class="mdl-layout__header-row">
       <span class="mdl-layout__title">CyberLife</span>
       <span class="page-title-span"> | </span>
-      <span class="mdl-layout__title"> Home </span>
+      <span id="pageTitle" class="mdl-layout__title"> Home </span>
 
      
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation">
-        <button id="yourPlantsButton" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored">
+        <button id="homePage" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored">
+          Home
+        </button>
+        <button id="yourPlantsPage" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored">
     		  Your Plants
     		</button>
-    		<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored">
+    		<button id="aboutPage" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--colored">
     		  About
     		</button>
         <button id="signin-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
@@ -114,46 +115,82 @@
       </nav>
   </div>
   <div id="tableContainer">
-    <table id="pot-table-2">
-      <tr>
-          <th>Name</th>
-          <th>Delay</th>
-          <th>Auto</th>
-          <th>Last Watered On</th>
-          <th>Water Level</th>
-          <th>Water</th>
-          <th>Save</th>
-          <th id="placeholder-header">Pot ID</th>
-      </tr>
     
-      <tr id="hidden">
-        <td>
-          <textarea id="plantName" placeholder="plant name"></textarea>
-        </td>
-        <td>
-          <textarea id="delayTime" placeholder="time delay"></textarea>
-        </td>
-        <td>
-          <label class="container">
-            <input type="checkbox" id="autoWater">
-            <span class="checkmark"></span>
-          </label>
-        </td>
-        <td><p id="lastWatered">Last Watered On<p></td>
-        <td><p id="waterLevel">Water Level</p></td>
-        <td>
-          <button type="button" class="tableBtn" id="waterBtn" onclick="waterPlant(this.id)">Water</button>
-        </td>
-        <td>
-          <button class="saveBtn, tableBtn" type="button" id="saveBtn" onclick="saveState(this.id)">Save</button>
-        </td>
-        <td class="tableID">
-          <p class= "tableID" id="potUID">Pot-ID-Example</p>
-        </td>
-      </tr> 
-      </table>
+    <div class="stack">
+      <table id="pot-table-2">
+        <tr>
+            <th>Name</th>
+            <th>Delay</th>
+            <th>Auto</th>
+            <th>Last Watered On</th>
+            <th>Water Level</th>
+            <th>Water</th>
+            <th>Save</th>
+            <th id="placeholder-header">Pot ID</th>
+        </tr>
+      
+        <tr id="hidden">
+          <td>
+            <textarea id="plantName" placeholder="plant name"></textarea>
+          </td>
+          <td>
+            <textarea id="delayTime" placeholder="time delay"></textarea>
+          </td>
+          <td>
+            <label class="container">
+              <input type="checkbox" id="autoWater">
+              <span class="checkmark"></span>
+            </label>
+          </td>
+          <td><p id="lastWatered">Last Watered On<p></td>
+          <td><p id="waterLevel">Water Level</p></td>
+          <td>
+            <button type="button" class="tableBtn" id="waterBtn" onclick="waterPlant(this.id)">Water</button>
+          </td>
+          <td>
+            <button class="saveBtn, tableBtn" type="button" id="saveBtn" onclick="saveState(this.id)">Save</button>
+          </td>
+          <td class="tableID">
+            <p class= "tableID" id="potUID">Pot-ID-Example</p>
+          </td>
+        </tr> 
+        </table>
+      </div>
+
+      <div class="stack">
+        <textarea id="pot-id" placeholder="Pot ID"></textarea>
+        <button id="add-pot-button" onClick="addPot()">Add Pot</button>
+      </div>
+
+    </div>
+    <div id="about" class="row">
+      <div class="column">
+        <img src="https://i.pinimg.com/736x/cc/be/f5/ccbef539f632e041a2593e0c2db485cb--body-poses-friend-pictures.jpg">
+      </div>
+      <div class="column" id="text-column">
+        <h1>About Us</h1>
+        <p class="aboutParagraph">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quam purus, vestibulum sit amet venenatis
+        sit amet, porta ut quam. Integer et congue leo. Nulla quis suscipit lacus. Fusce faucibus a felis vitae euismod
+        Phasellus metus ante, finibus vitae sem in, aliquet pellentesque sem. Nulla tempus mauris in sem pharetra, sit
+        amet eleifend erat dictum. Cras sed urna justo. Donec iaculis consequat sagittis. Quisque vulputate, magna quis
+        varius gravida, libero eros tincidunt diam, a facilisis sem lacus finibus mi. Sed egestas ante et tempor
+        fermentum. Integer tristique ultrices mauris et posuere. Curabitur vitae ullamcorper massa.</p>
+
+        <p class="aboutParagraph">Pellentesque id mattis lacus. Proin nisi est, tincidunt a nisi eu, efficitur tempor enim. Duis pretium turpis nulla, at iaculis risus imperdiet vel. Quisque placerat sit amet libero in posuere. Maecenas dignissim massa in massa cursus, suscipit sollicitudin neque lacinia. Sed sit amet tortor a mi interdum consequat. Fusce ac orci enim. Cras pretium dui at metus tincidunt, quis faucibus turpis interdum. Vivamus tincidunt, sapien vel interdum pretium, libero est cursus sem, et malesuada magna mi ac leo. Cras justo nulla, vulputate ut suscipit consectetur, dignissim eu mi. Etiam accumsan orci ut rhoncus bibendum. Etiam malesuada ipsum ex, quis sollicitudin risus ultrices a. Maecenas eget lorem et nunc maximus facilisis.</p>
+
+        <p class="aboutParagraph">Maecenas cursus lobortis scelerisque. Cras dapibus auctor diam nec viverra. Mauris ante lectus, rhoncus non posuere ac, iaculis sit amet odio. Suspendisse dictum, nulla at fringilla porttitor, arcu lectus posuere justo, et ornare nisi lacus non nisi. Vestibulum sem ipsum, porttitor at pretium et, varius et elit. Quisque auctor est non diam bibendum interdum. Duis nec sapien a eros molestie mollis a quis ipsum. Duis pharetra, odio eleifend egestas suscipit, tellus eros semper ante, commodo placerat urna nisi ut sem. Aliquam erat volutpat. In hac habitasse platea dictumst. Maecenas eleifend felis ut risus porta ornare. Ut lacinia tristique nisl, sed scelerisque lectus venenatis a.</p>
+
+        <p class="aboutParagraph">Quisque molestie, turpis at scelerisque placerat, nulla erat vestibulum mi, quis iaculis enim ipsum sit amet justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis non lacinia turpis, id dictum quam. Phasellus congue posuere lorem, sed condimentum augue rutrum ut. Curabitur enim ex, fringilla non interdum non, dapibus varius libero. Duis sit amet vehicula diam. Nullam purus purus, rutrum ut hendrerit non, scelerisque vitae nisi. Proin dapibus magna id erat lacinia, nec auctor orci fermentum. Cras eget volutpat dui, consectetur vestibulum purus. Vestibulum dapibus facilisis nulla eget lobortis. Vivamus ipsum ante, facilisis ut urna tincidunt, faucibus rhoncus magna. Suspendisse potenti. Praesent a auctor felis, a tempus magna. Sed facilisis purus ut erat interdum porta.</p>
+      </div>
+    </div>
+    <div id="greeting">
+      <div class="column">
+       <p id="greetingMessage">Welcome to CyberLife!</p>
+      </div>
     </div>
 </div>
+
 
 
 

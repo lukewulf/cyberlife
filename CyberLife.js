@@ -71,6 +71,17 @@ $("#register-button").click(
 );
 //Auto-signout on refresh, fixes some weird problems until I find a way to fix other erros
 firebase.auth().signOut();
+//console.log("Automatic Sign Out Called");
+$("#tableContainer").hide();
+
+//$("#signout-button").hide();
+//$("#yourPlantsButton").hide();
+
+/*if(firebase.auth().currentUser){
+	console.log(firebase.auth().currentUser.uid);
+}*/
+
+console.log(firebase.auth().currentUser);
 
 /* Listener for changing user signin/signout state */
 firebase.auth().onAuthStateChanged(function(user) {
@@ -87,6 +98,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     id = user.uid;
     email = user.email;
+
 
     //Set User Data Everytime they sign in, need to fix but works
     //Quits if there is already that user in the database
@@ -108,8 +120,9 @@ firebase.auth().onAuthStateChanged(function(user) {
     //UI updates
     $("#signin-button").hide();
     $("#signout-button").show();
-    $("#yourPlantsButton").show();
+    $("#yourPlantsPage").show();
     $("#pot-table-2").show();
+    
 
    	var potRef = firebase.database().ref("Pots/Pot0");
    	var userPotRef = firebase.database().ref("Users/" + id + "/pots");
@@ -125,11 +138,14 @@ firebase.auth().onAuthStateChanged(function(user) {
   	$("#signout-button").hide();
   	$("#signin-button").show();
   	$(".login-cover").hide();
-  	$("#yourPlantsButton").hide();
+  	$("#yourPlantsPage").hide();
+  	$('#about').hide();
   	id = null;
   	email = null;
 
+	$("pageTitle").text("Home");
 	$("#pot-table-2").hide();
+
 	 
   }
 });
@@ -167,7 +183,7 @@ $("#login-button").click(
 
 				//Sign In Function
 				firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error){
-					firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+					firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 					//Reset Login Page
 					$("#login-error").show().text(error.message);
 					$("#login-progress").hide();
@@ -201,6 +217,11 @@ $("#signout-button").click(
 	function(){
 		firebase.auth().signOut().then(function(){
 			//Sign-out successful
+			console.log("Sign Out Successful");
+			$('#about').hide();
+			$('#greeting').show();
+			$('#tableContainer').hide();
+			$('#pageTitle').text("Home");
 		}, function(error){
 			//Sign-out failed, show error msg
 			alert(error.message);
@@ -509,5 +530,22 @@ function waterPlant(btnID){
 }
 
 $("#aboutPage").click(function(){
-	window.location = 'CyberLifeAbout.html';
+	$('#about').show();
+	$('#tableContainer').hide();
+	$('#greeting').hide();
+	$('#pageTitle').text("About");
+});
+
+$("#yourPlantsPage").click(function(){
+	$('#about').hide();
+	$('#greeting').hide();
+	$('#tableContainer').show();
+	$('#pageTitle').text("Your Plants");
+});
+
+$("#homePage").click(function(){
+	$('#about').hide();
+	$('#greeting').show();
+	$('#tableContainer').hide();
+	$('#pageTitle').text("Home");
 })

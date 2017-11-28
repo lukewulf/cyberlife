@@ -163,7 +163,7 @@
 
 #tableContainer{
 	display: flex;
-	margin-top: 300px;
+	padding-top: 300px;
 	justify-content: center;
 	align-items: center;
 	z-index: 1;
@@ -174,4 +174,53 @@
 	background: url('http://c2.peakpx.com/wallpaper/261/792/19/5k-botanical-minimal-potted-wallpaper.jpg');
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
+}
+
+/* Home Page Style */
+#greeting{
+	color: #009688;
+	padding-top: 175px;
+	margin-left: 100px;
+	display: flex;
+}
+
+#greetingMessage{
+	font-size: 120px;
+	font-style: bolder;
+	line-height: 125%;
+}
+
+/*About Page Style*/
+#about{
+	margin-left: 100px;
+	display flex;
+	text-align: left;
+	justify-content: left;
+	color: white;
+}
+
+.aboutParagraph{
+	font-size: 16px;
+	font-style: italic;
+	background: #009688;
+}
+
+#text-column{
+	background: #009688;
+	padding: 15px;
+}
+.column{
+	float: left;
+	width: 40%;
+	margin: 50px 50px;
+}
+
+.row:after{
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.stack{
+	display: flex;
 }
