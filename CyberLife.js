@@ -573,7 +573,7 @@ function addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID, led
 }
 
 function saveState(btnID){
-	var index = btnID.slice(7, btnID.length);
+	var index = btnID.slice(9, btnID.length);
 	var potID = ("#potUID" + index);
 	var delayID = ("#delayTime" + index);
 	var plantID = ("#plantName" + index);

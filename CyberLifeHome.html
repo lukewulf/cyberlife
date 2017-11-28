@@ -126,21 +126,21 @@
             <th>Last Watered On</th>
             <th>Moisture</th>
             <th>Water</th>
-            <th>Save</th>
+            <th class="tableID">Save</th>
             <th id="placeholder-header" class="tableID">Pot ID</th>
             <th>Lights On</th>
         </tr>
       
         <tr id="hidden">
           <td>
-            <textarea id="plantName" placeholder="plant name"></textarea>
+            <textarea id="plantName" onChange="saveState(this.id)" placeholder="plant name"></textarea>
           </td>
           <td>
-            <textarea id="delayTime" placeholder="time delay"></textarea>
+            <textarea id="delayTime" onChange="saveState(this.id)" placeholder="time delay"></textarea>
           </td>
           <td>
             <label class="container">
-              <input type="checkbox" id="autoWater">
+              <input type="checkbox" id="autoWater" onChange="saveState(this.id)">
               <span class="checkmark"></span>
             </label>
           </td>
@@ -149,8 +149,8 @@
           <td>
             <button type="button" class="tableBtn" id="waterBtn" onclick="waterPlant(this.id)">Water</button>
           </td>
-          <td>
-            <button class="saveBtn, tableBtn" type="button" id="saveBtn" onclick="saveState(this.id)">Save</button>
+          <td class="tableID">
+            <button class="saveBtn, tableBtn" type="button" id="saveBtnnn" onclick="saveState(this.id)">Save</button>
           </td>
           <td class="tableID">
             <p class= "tableID" id="potUID">Pot-ID-Example</p>
