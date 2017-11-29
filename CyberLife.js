@@ -450,10 +450,10 @@ function insertRow(potID){
 				var auto = snap.val().autoWater;
 				var lastWatered = snap.val().lastWatered;
 				var time = new Date(lastWatered * 1000);
-				var waterLevel = snap.val().waterLevel;
+				var moistureLevel = snap.val().moisture;
 				var ledState = snap.val().led_state;
 				ids.push(potID);
-				addTableRow(plantName, delay, auto, time.toLocaleString(), waterLevel, potID, ledState);
+				addTableRow(plantName, delay, auto, time.toLocaleString(), moistureLevel, potID, ledState);
 			}
 			else{
 				console.log("found repeat plant");
@@ -474,18 +474,26 @@ function updateTableRow(repeatID){
 					var plantName = snap.val().plantName;
 					var delay = snap.val().delay;
 					var auto = snap.val().autoWater;
-					var lastWatered = snap.val().moisture;
+					var lastWatered = snap.val().lastWatered;
 					var time = new Date(lastWatered * 1000);
-					var waterLevel = snap.val().moisture;
+					var moistureLevel = snap.val().moisture;
 					var ledState = snap.val().led_state;
 
 					var editRow = table.rows[i];
 					var inp0 = editRow.cells[0].getElementsByTagName('textarea')[0];
 					inp0.value = plantName;
-
-					var inp1 = editRow.cells[1].getElementsByTagName('textarea')[0];
-					inp1.value = delay;
 					
+					//Days
+				    var sel1 = editRow.cells[1].getElementsByTagName('select')[0];
+				    sel1.value = Math.floor(delay/86400);
+
+				    //Hours
+				    var sel2 = editRow.cells[1].getElementsByTagName('select')[1];
+				    sel2.value = Math.floor((delay%86400)/3600);
+
+				    //Minutes
+				    var sel3 = editRow.cells[1].getElementsByTagName('select')[2];
+				    sel3.value = Math.floor(((delay%86400)%3600)/60);
 
 					var inp2 = editRow.cells[2].getElementsByTagName('input')[0];
 					if(inp2){
@@ -493,7 +501,7 @@ function updateTableRow(repeatID){
 					}
 
 					editRow.cells[3].innerText = time.toLocaleString();
-					editRow.cells[4].innerText = waterLevel;
+					editRow.cells[4].innerText = moistureLevel;
 					var inp8 = editRow.cells[8].getElementsByTagName('input')[0];
 					if(inp8){
 						inp8.checked = ledState;
@@ -504,7 +512,7 @@ function updateTableRow(repeatID){
 		}
 }
 /* Helper method to inject the html table row into the document */
-function addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID, ledState){
+function addTableRow(plantName, delay, auto, lastWatered, moistureLevel, potID, ledState){
 
 
 		var table = document.getElementById('pot-table-2');
@@ -521,11 +529,32 @@ function addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID, led
 	    id = inp0.id;
 	    inp0.for = id;
 
-	    var inp1 = new_row.cells[1].getElementsByTagName('textarea')[0];
+	    /*var inp1 = new_row.cells[1].getElementsByTagName('textarea')[0];
 	    inp1.id += len;
 	    inp1.value = delay;
 	    id = inp1.id;
-	    inp1.for = id;
+	    inp1.for = id;*/
+
+		//Days
+	    var sel1 = new_row.cells[1].getElementsByTagName('select')[0];
+	    sel1.id += len;
+	    id = sel1.id;
+	    sel1.for = id;
+	    sel1.value = Math.floor(delay/86400);
+
+	    //Hours
+	    var sel2 = new_row.cells[1].getElementsByTagName('select')[1];
+	    sel2.id += len;
+	    id = sel2.id;
+	    sel2.for = id;
+	    sel2.value = Math.floor((delay%86400)/3600);
+
+	    //Minutes
+	    var sel3 = new_row.cells[1].getElementsByTagName('select')[2];
+	    sel3.id += len;
+	    id = sel3.id;
+	    sel3.for = id;
+	    sel3.value = Math.floor(((delay%86400)%3600)/60);
 
 	    var inp2 = new_row.cells[2].getElementsByTagName('input')[0];
 	    if(inp2){
@@ -540,7 +569,7 @@ function addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID, led
 	    new_row.cells[3].innerHTML = lastWatered;
 
 	    var inp4 = new_row.cells[4].getElementsByTagName('p')[0];
-	    new_row.cells[4].innerHTML = waterLevel;
+	    new_row.cells[4].innerHTML = moistureLevel;
 	    
 	    var inp5 = new_row.cells[5].getElementsByTagName('button')[0];
 	    if(inp5){
@@ -575,7 +604,7 @@ function addTableRow(plantName, delay, auto, lastWatered, waterLevel, potID, led
 function saveState(btnID){
 	var index = btnID.slice(9, btnID.length);
 	var potID = ("#potUID" + index);
-	var delayID = ("#delayTime" + index);
+	//var delayID = ("#delayTime" + index);
 	var plantID = ("#plantName" + index);
 	var checkID = ("#autoWater" + index);
 	saveFlag = true;
@@ -584,7 +613,7 @@ function saveState(btnID){
 	potListRef = firebase.database().ref('Pots');
 	potListRef.child(pot).update({
 		plantName: $(plantID).val(),
-		delay: $(delayID).val(),
+		//delay: $(delayID).val(),
 		autoWater: $(checkID).is(':checked')
 	});
 
@@ -617,6 +646,28 @@ function lightsOn(btnID){
 	});
 }
 
+function saveTime(btnID){
+	var index = btnID.slice(7, btnID.length);
+	var potID = ("#potUID" + index);
+	var pot = $(potID).text();
+
+	//Converting time to seconds
+	var timeSec = 0;
+	var days = Number($("#numDays" + index).find(":selected").text());
+	var hours = Number($("#numHour" + index).find(":selected").text());
+	var minutes = Number($("#numMins" + index).find(":selected").text());
+
+	timeSec += days*24*3600;
+	timeSec += hours*3600;
+	timeSec += minutes*60;
+
+	//Saving time
+	potListRef = firebase.database().ref('Pots');
+	potListRef.child(pot).update({
+		delay: timeSec
+	});
+}
+
 $("#aboutPage").click(function(){
 	$('#about').show();
 	$('#tableContainer').hide();
@@ -636,4 +687,4 @@ $("#homePage").click(function(){
 	$('#greeting').show();
 	$('#tableContainer').hide();
 	$('#pageTitle').text("Home");
-})
+});

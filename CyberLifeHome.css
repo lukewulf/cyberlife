@@ -239,3 +239,7 @@
 .tableID{
 	display: none;
 }
+
+.timeDelay{
+	display: inline-block;
+}
