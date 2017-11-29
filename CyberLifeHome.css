@@ -243,3 +243,10 @@
 .timeDelay{
 	display: inline-block;
 }
+
+#headerIcon{
+	display: inline-flex;
+	vertical-align: middle;
+	padding-top: 5px;
+	padding-right: 40px;
+}
