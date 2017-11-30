@@ -1,6 +1,10 @@
-<<<<<<< HEAD
+
 *{
 	font-family: 'Roboto', sans-serif;
+}
+
+.debug{
+	display: none;
 }
 
 .page-title-span{
@@ -327,3 +331,4 @@
 	padding-top: 25px;
 	background: #FFF;
 }
+

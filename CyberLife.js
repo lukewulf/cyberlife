@@ -157,7 +157,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
   	$("#homePage").css('color', '#009688');
 	$("#yourPlantsPage").css('color', '#484848');
-	$("#aboutPage").css('color', '#484848');
+	$("#aboutPage").css('color', '#484848');git
 	$("pageTitle").text("Home");
 	$("#pot-table-2").hide();
 
