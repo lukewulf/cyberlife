@@ -74,7 +74,7 @@ $("#register-button").click(
 firebase.auth().signOut();
 //console.log("Automatic Sign Out Called");
 $("#tableContainer").hide();
-
+$("#homePage").css('color', '#009688');
 //$("#signout-button").hide();
 //$("#yourPlantsButton").hide();
 
@@ -673,6 +673,10 @@ $("#aboutPage").click(function(){
 	$('#tableContainer').hide();
 	$('#greeting').hide();
 	$('#pageTitle').text("About");
+
+	$("#homePage").css('color', '#484848');
+	$("#yourPlantsPage").css('color', '#484848');
+	$("#aboutPage").css('color', '#009688');
 });
 
 $("#yourPlantsPage").click(function(){
@@ -680,6 +684,10 @@ $("#yourPlantsPage").click(function(){
 	$('#greeting').hide();
 	$('#tableContainer').show();
 	$('#pageTitle').text("Your Plants");
+
+	$("#homePage").css('color', '#484848');
+	$("#yourPlantsPage").css('color', '#009688');
+	$("#aboutPage").css('color', '#484848');
 });
 
 $("#homePage").click(function(){
@@ -687,5 +695,9 @@ $("#homePage").click(function(){
 	$('#greeting').show();
 	$('#tableContainer').hide();
 	$('#pageTitle').text("Home");
+
+	$("#homePage").css('color', '#009688');
+	$("#yourPlantsPage").css('color', '#484848');
+	$("#aboutPage").css('color', '#484848');
 });
 
