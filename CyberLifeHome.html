@@ -1,14 +1,15 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CyberLife</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<title>CyberLife</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-green.min.css" />
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" type="text/css" href="CyberLifeHome.css">
+	<!-- Main Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="CyberLifeHome.css">
 </head>
 <body>
 
@@ -22,16 +23,16 @@
 
 
 <table>
-  <thead>
-    <tr>
-      <td>UID</td>
-      <td>Email</td>
-      <td>Action</td>
-    </tr>
-  </thead>
-  <tbody id="table_body">
+	<thead>
+		<tr>
+			<td>UID</td>
+			<td>Email</td>
+			<td>Action</td>
+		</tr>
+	</thead>
+	<tbody id="table_body">
 
-  </tbody>
+	</tbody>
 </table>
 
 
@@ -93,18 +94,18 @@
           Home
         </button>
         <button id="yourPlantsPage" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--colored">
-          Your Plants
-        </button>
-        <button id="aboutPage" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored">
-          About
-        </button>
+    		  Your Plants
+    		</button>
+    		<button id="aboutPage" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored">
+    		  About
+    		</button>
         <button id="signin-button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
           Sign In
         </button>
-        <button id="signout-button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
-          Sign Out
+    		<button id="signout-button" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
+    		  Sign Out
           <i id="button-right-icon" class="material-icons">account_circle</i>
-        </button>
+    		</button>
       </nav>
     </div>
   </header>
@@ -280,32 +281,61 @@
 
     <!-- About Page -->
     <div id="about" class="row">
-      <div class="column">
+      <div id="container">
+      <!--<div class="column">
         <img src="teamPhoto.jpg">
-      </div>
+      </div>-->
       <div class="column" id="text-column">
-        <h1 id="about-header">Who & Why</h1>
-        <h6 id="about-subheader"> About Us </h6>
+        <div class="section">
+          <h1 id="about-header">- Our Mission -</h1>
+          <h6 id="about-subheader">To eliminate the burden of watering plants</h6>
+          <h3 class="paragraphHead">About</h3>
+          <p class="aboutParagraph">
+          At CyberLife, we love plants. And, you should not have to worry about taking care of your plants on a daily basis.  Consistently, we found that people forget to water their plants, accidentally killing them in the process.  We believe that all people should be able to enjoy Nature's beauty without the hassle and burden of a fixed watering schedule.  Plants should no longer shrivel and die on your windowsill, and instead thrive in the most remote of places.</p>
 
-        <h3 class="paragraphHead">Why CyberLife?</h3>
-        <h6 class="paraSubhead">Our Purpose</h6>
-        <p class="aboutParagraph">
-        Because we love plants, and you should not have to worry about taking care of your plants on a daily basis.  Consistently, we found that people forget to water their plants, accidentally killing them in the process.  At CyberLife, we believe that all people should be able to enjoy Nature's beauty without the hassle and burden of a fixed watering schedule.  Plants should no longer shrivel and die on your windowsill, and instead thrive in the most remote of places.</p>
+          <p class="aboutParagraph">CyberLife is a wonderful addition to any green-thumb hobbyist's home.  With our unique web application and portable design, you should no longer worry about keeping your hard-to-reach plants alive.  With a simple click of a button and a WiFi connection, you will be able to remotely water your plants from the comfort of your phone, completely reducing the need to fill up a watering can and making the rounds around your garden.  Also, with our integrated water sensor, we will notify you when you need to refill the water supply to your CyberLife pot.  With CyberLife, the homeplant will enter the 21st century.</p>
+        </div>
+        <div class="section">
+          <h3 class="paragraphHead">The Team</h3>
+          <div class="aboutRow">
+            <div class="aboutColumn">
+              <img src="https://image.flaticon.com/icons/png/128/149/149452.png">
+              <h4>Luke Wulf</h4>
+              <h6>[Job Description]</h6>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend ac urna non faucibus. Nam suscipit magna magna, nec dignissim augue iaculis quis. Aenean pulvinar </p>
+              <p>UCSD Computer Engineering Class of 2019</p>
+            </div>
+            <div class="aboutColumn">
+              <img src="https://image.flaticon.com/icons/png/128/149/149452.png">
+              <h4>Kevin Tain</h4>
+              <h6>[Job Description]</h6>
+              <p>Nullam lobortis orci in dui congue, posuere ultrices arcu aliquet. Nullam sollicitudin varius urna vel facilisis. Vestibulum mattis eget ipsum et blandit. Ut rhoncus bibendum nisl, a</p>
+              <p>UCSD Computer Engineering Class of 2017</p>
+            </div>
+            <div class="aboutColumn">
+              <img src="https://image.flaticon.com/icons/png/128/149/149452.png">
+              <h4>Umut Fidan</h4>
+              <h6>[Job Description]</h6>
+              <p>n lacinia purus sodales, cursus lorem quis, accumsan velit. Maecenas a maximus justo. Praesent id facilisis nulla, posuere efficitur orci. Vestibulum ante ipsum primis in faucibus orci luctus </p>
+              <p>UCSD Electrical Engineering Class of 2020</p>           
+            </div>
+            <div class="aboutColumn">
+              <img src="https://image.flaticon.com/icons/png/128/149/149452.png">
+              <h4>Tara Shamblin</h4>
+              <h6>[Job Description]</h6>
+              <p>Donec et diam vel lectus facilisis rhoncus. Suspendisse tincidunt purus id enim aliquet, a cursus neque dapibus. Aliquam erat volutpat. Nam pretium vulputate magna, eu pellentesque dolor. </p>
+              <p>UCSD Electrical Engineering Class of 2019</p>               
+            </div>
+          </div>
+        </div>
 
-        <p class="aboutParagraph">CyberLife is a wonderful addition to any greenthumb hobbyist's home.  WIth our unique web application and portable design, you should no longer worry about keeping your hard-to-reach plants alive.  With a simple click of a button and a WiFi connection, you will be able to remotely water your plants from the comfort of your phone, completely reducing the need to fill up a watering can and making the rounds around your garden.  Also, with our integrated water sensor, we will notify you when you need to refill the water supply to your CyberLife pot.  With CyberLife, the homeplant will enter the 21st century.</p>
-
-        <h3 class="paragraphHead">Who Are We?</h3>
-        <h6 class="paraSubhead">Our Team</h6>
-        <ul class="aboutParagraph">
-          <li>Kevin Tain</li>
-          <li>Umut Fidan</li>
-          <li>Tara Shamblin</li>
-          <li>Luke Wulf</li>
-        </ul>
-
-        <p class="aboutParagraph">CyberLife was founded by four UC San Diego college students.  As the final project for ECE196: Hands On Project Building, we have worked to create an IoT solution to what we believe is a common problem using our knowledge of hardware, software and mechanical design.  The initial prototype of the web application and CyberLife pot were created in 5 weeks, and we are constantly finding ways to improve our software and hardware designs.  Through this project, we have learned the important skills of full-stack web development, python programming and database management through Google Firebase.</p>
+        <div class="section">
+          <h3 class="paragraphHead">Our Origin</h3>
+          <p class="aboutParagraph">CyberLife was founded by four UC San Diego college students.  As the final project for ECE196: Hands On Project Building, we have worked to create an IoT solution to what we believe is a common problem using our knowledge of hardware, software and mechanical design.  The initial prototype of the web application and CyberLife pot were created in 5 weeks, and we are constantly finding ways to improve our software and hardware designs.  Through this project, we have learned the important skills of full-stack web development, python programming and database management through Google Firebase.</p>
+        </div>
       </div>
     </div>
+  </div>
 
     <!-- Home Page -->
     <div id="greeting">
@@ -355,5 +385,6 @@
 
 
 </body>
+
 
 </html>

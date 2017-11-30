@@ -1,3 +1,4 @@
+
 /** Test Enviroment for Random Things */
 $(document).ready(function(){
 	var rootRef = firebase.database().ref().child("Users");
@@ -148,10 +149,15 @@ firebase.auth().onAuthStateChanged(function(user) {
   	$("#Home").hide();
   	$("#greeting").show();
   	$('#about').hide();
+
+  	$('')
   	id = null;
   	email = null;
   	signedIn = false;
 
+  	$("#homePage").css('color', '#009688');
+	$("#yourPlantsPage").css('color', '#484848');
+	$("#aboutPage").css('color', '#484848');
 	$("pageTitle").text("Home");
 	$("#pot-table-2").hide();
 
@@ -771,3 +777,4 @@ function register() {
     }
     dialog.showModal();
 }
+
