@@ -79,6 +79,7 @@ $("#homePage").css('color', '#009688');
 //$("#signout-button").hide();
 //$("#yourPlantsButton").hide();
 
+$(".debug").hide();
 /*if(firebase.auth().currentUser){
 	console.log(firebase.auth().currentUser.uid);
 }*/
