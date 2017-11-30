@@ -195,17 +195,16 @@
 	display flex;
 	text-align: left;
 	justify-content: left;
-	color: white;
+	color: #484848;
 }
 
 .aboutParagraph{
 	font-size: 16px;
-	font-style: italic;
-	background: #009688;
+	background: #FFF;
 }
 
 #text-column{
-	background: #009688;
+	background: #FFF;
 	padding: 15px;
 }
 .column{
@@ -267,4 +266,30 @@
 
 .mdl-button.mdl-button--colored{
 	color: #484848;
+}
+
+#flower{
+	color: #009688;
+}
+
+#about-subheader{
+	margin: 0;
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+#about-header{
+	margin: 0;
+	margin-top: 50px;
+	text-align: center;
+}
+
+.paragraphHead{
+	margin: 0;
+	margin-top: 20px;
+}
+
+.paraSubhead{
+	margin: 0;
+	margin-bottom: 20px;
 }
