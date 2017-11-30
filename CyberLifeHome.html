@@ -18,8 +18,6 @@
 <h1 id="mainText"> This is some text </h1>
 <textarea id="submitText" placeholder="Enter how ofter you wish to water your plant here ..."></textarea>
 <button id="submitButton" onclick="submitClick()">Submit</button>
-
-
 <h2>Pot Adding Steps</h2>
 
 
@@ -66,7 +64,7 @@
         </button>
         <div id="login-progress" class="mdl-spinner mdl-js-spinner is-active"></div>
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" id="register-button">
-          Sign Up
+          Register
         </button>
     </div>
 </dialog>
@@ -79,9 +77,11 @@
 <!-- Main Page -->
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header, background">
-  <header id ="header" class="mdl-layout__header">
-    <div class="mdl-layout-icon"></div>
-    <div id="headerText" class="mdl-layout__header-row">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout-icon" id="headerIcon">
+      <i class="material-icons">filter_vintage</i>
+    </div>
+    <div class="mdl-layout__header-row">
       <span class="mdl-layout__title">CyberLife</span>
       <span class="page-title-span"> | </span>
       <span id="pageTitle" class="mdl-layout__title"> Home </span>
@@ -89,23 +89,7 @@
      
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation">
-        <button id="homePage" type="button" class="headerButton">
-          Home
-        </button>
-        <button id="yourPlantsPage" type="button" class="headerButton">
-          Your Plants
-        </button>
-        <button id="aboutPage" type="button" class="headerButton">
-          About
-        </button>
-        <button id="signin-button" type="button" class="headerButton">
-          Sign In
-        </button>
-        <button id="signout-button" type="button" class="headerButton">
-          Sign Out
-          <i id="button-right-icon" class="material-icons">account_circle</i>
-        </button>
-        <!--<button id="homePage" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised">
+        <button id="homePage" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored">
           Home
         </button>
         <button id="yourPlantsPage" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored">
@@ -120,16 +104,10 @@
     		<button id="signout-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
     		  Sign Out
           <i id="button-right-icon" class="material-icons">account_circle</i>
-    		</button>-->
+    		</button>
       </nav>
     </div>
   </header>
-  <!--<div class="mdl-layout__drawer">
-      <span class="mdl-layout-title">CyberLife</span>
-     <nav class="mdl-navigation mdl-layout--large-screen-only">
-        <a class="mdl-navigation__link" href="CyberLifeAbout.html">About</a>
-      </nav>
-  </div> -->
 
   <!-- Table Page -->
   <div id="tableContainer">
@@ -137,7 +115,7 @@
       <table id="pot-table-2">
         <tr>
             <th>Name</th>
-            <th>Delay</th>
+            <th>Water Every</th>
             <th>Auto</th>
             <th>Last Watered On</th>
             <th>Moisture</th>
@@ -152,7 +130,120 @@
             <textarea id="plantName" onChange="saveState(this.id)" placeholder="plant name"></textarea>
           </td>
           <td>
-            <textarea id="delayTime" onChange="saveState(this.id)" placeholder="time delay"></textarea>
+            <!--<textarea id="delayTime" onChange="saveState(this.id)" placeholder="time delay"></textarea>-->
+            <select name="days" class="timeDelay" id="numDays" onChange="saveTime(this.id)">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+            </select>
+
+            <p class="timeDelay">Days</p>
+
+            <select name="hours" class="timeDelay" id="numHour" onChange="saveTime(this.id)">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+              <option>21</option>
+              <option>22</option>
+              <option>23</option>
+            </select>
+
+            <p class="timeDelay">Hours</p>
+
+            <select name="minutes" class="timeDelay" id="numMins" onChange="saveTime(this.id)">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+              <option>13</option>
+              <option>14</option>
+              <option>15</option>
+              <option>16</option>
+              <option>17</option>
+              <option>18</option>
+              <option>19</option>
+              <option>20</option>
+              <option>21</option>
+              <option>22</option>
+              <option>23</option>
+              <option>24</option>
+              <option>25</option>
+              <option>26</option>
+              <option>27</option>
+              <option>28</option>
+              <option>29</option>
+              <option>30</option>
+              <option>31</option>
+              <option>32</option>
+              <option>33</option>
+              <option>34</option>
+              <option>35</option>
+              <option>36</option>
+              <option>37</option>
+              <option>38</option>
+              <option>39</option>
+              <option>40</option>
+              <option>41</option>
+              <option>42</option>
+              <option>43</option>
+              <option>44</option>
+              <option>45</option>
+              <option>46</option>
+              <option>47</option>
+              <option>48</option>
+              <option>49</option>
+              <option>50</option>
+              <option>51</option>
+              <option>52</option>
+              <option>53</option>
+              <option>54</option>
+              <option>55</option>
+              <option>56</option>
+              <option>57</option>
+              <option>58</option>
+              <option>59</option>
+            </select>
+
+            <p class="timeDelay">Minutes</p>
           </td>
           <td>
             <label class="container">
@@ -181,7 +272,7 @@
         </table>
       </div>
 
-      <div class="stack">
+      <div id="addBtn" class="stack">
         <textarea id="pot-id" placeholder="Pot ID"></textarea>
         <button id="add-pot-button" class="tableBtn">Add Pot</button>
       </div>
@@ -213,8 +304,7 @@
     <!-- Home Page -->
     <div id="greeting">
       <div class="column">
-       <p id="greetingMessage">Manage Your Plants from Anywhere</p>
-       <button id="register-Pot" type="button" class="headerButton">Register a Pot Now</button>
+       <p id="greetingMessage">Welcome to CyberLife!</p>
       </div>
     </div>
 </div>

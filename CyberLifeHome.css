@@ -10,36 +10,6 @@
 	margin-left: 10px;
 }
 
-#header{
-	background-color: white;
-}
-
-#headerText{
-	color: #484848;
-}
-.headerButton{
-	background-color: white;
-	padding: 10px;
-	border-radius: 4px;
-    color: #484848;
-    border: 2px solid white;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-}
-
-.headerButton:hover {
-	color: SlateGray;
-}
-
-.headerButton:focus {
-	outline: none;
-}
-
-/*#homePage{
-	background-color: white
-	color: 484848;
-}*/
-
 /* Login Section */
 
 .login-cover{
@@ -207,16 +177,15 @@
 
 /* Home Page Style */
 #greeting{
-	color: #484848;
+	color: #009688;
 	padding-top: 175px;
 	margin-left: 100px;
 	display: flex;
 }
 
 #greetingMessage{
-	font-size: 80px;
+	font-size: 120px;
 	font-style: bolder;
-	font-family: 'Roboto', sans-serif;
 	line-height: 125%;
 }
 
@@ -269,4 +238,19 @@
 
 .tableID{
 	display: none;
+}
+
+.timeDelay{
+	display: inline-block;
+}
+
+#headerIcon{
+	display: inline-flex;
+	vertical-align: middle;
+	padding-top: 5px;
+	padding-right: 40px;
+}
+
+#addBtn{
+	margin-bottom: 100px;
 }
