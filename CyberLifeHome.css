@@ -131,7 +131,7 @@ html, body{
   left: 0;
   height: 25px;
   width: 25px;
-  background-color: #eee;
+  background-color: #ddd;
 }
 
 /* On mouse-over, add a grey background color */
@@ -240,7 +240,6 @@ html, body{
 	font-size: 20px;
 	height: 25px;
 	padding: 20px 20px;
-	border: #009688 2px solid;
 }
 
 #add-pot-button{
@@ -346,5 +345,9 @@ html, body{
 	padding: 50px 100px;
 	padding-top: 25px;
 	background: #FFF;
+}
+
+.gradYear{
+	font-weight: bold;
 }
 
