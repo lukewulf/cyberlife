@@ -254,3 +254,17 @@
 #addBtn{
 	margin-bottom: 100px;
 }
+
+.mdl-layout__header{
+	background-color: #FFF;
+	color: #484848;
+}
+
+.mdl-button{
+	background: #FFF;
+	color: #484848;
+}
+
+.mdl-button.mdl-button--colored{
+	color: #484848;
+}
