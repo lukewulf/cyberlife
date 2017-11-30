@@ -84,12 +84,17 @@ $("#homePage").css('color', '#009688');
 
 console.log(firebase.auth().currentUser);
 
+var signedIn = false;
+
 /* Listener for changing user signin/signout state */
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
 
     //Hide the Login Page
+    signedIn = true;
+    $('#greeting').hide();
+    $('#Home').show();
     $(".login-cover").hide();
     var dialog = document.querySelector('#login-dialog');
     if(!dialog.showModal){
@@ -140,9 +145,12 @@ firebase.auth().onAuthStateChanged(function(user) {
   	$("#signin-button").show();
   	$(".login-cover").hide();
   	$("#yourPlantsPage").hide();
+  	$("#Home").hide();
+  	$("#greeting").show();
   	$('#about').hide();
   	id = null;
   	email = null;
+  	signedIn = false;
 
 	$("pageTitle").text("Home");
 	$("#pot-table-2").hide();
@@ -175,7 +183,8 @@ $("#login-button").click(
 	function(){
 		var email = $("#login-email").val();
 		var password = $("#login-password").val();
-		if(email && password){
+		login(email, password);
+		/*if(email && password){
 				//Buffer Animation
 				$("#login-progress").show();
 				$('#register-button').hide();
@@ -191,15 +200,16 @@ $("#login-button").click(
 					$('#register-button').show();
 					$("#login-button").show();
 				});
-		}
+		}*/
 	}
 );
 
 /* Signin-onClick */
 $("#signin-button").click(
 	function(){
+		register();
 		// Show the sign-in overlay
-	    $(".login-cover").show();
+	    /*$(".login-cover").show();
 	    $("#login-progress").hide();
 		$('#register-button').show();
 		$("#login-button").show();
@@ -209,7 +219,7 @@ $("#signin-button").click(
 	    if(!dialog.showModal){
 	    	dialogPolyfill.registerDialog(dialog);
 	    }
-	    dialog.showModal();
+	    dialog.showModal();*/
 	}
 );
 
@@ -672,6 +682,7 @@ $("#aboutPage").click(function(){
 	$('#about').show();
 	$('#tableContainer').hide();
 	$('#greeting').hide();
+	$('#Home').hide();
 	$('#pageTitle').text("About");
 
 	$("#homePage").css('color', '#484848');
@@ -682,6 +693,7 @@ $("#aboutPage").click(function(){
 $("#yourPlantsPage").click(function(){
 	$('#about').hide();
 	$('#greeting').hide();
+	$('#Home').hide();
 	$('#tableContainer').show();
 	$('#pageTitle').text("Your Plants");
 
@@ -692,12 +704,70 @@ $("#yourPlantsPage").click(function(){
 
 $("#homePage").click(function(){
 	$('#about').hide();
-	$('#greeting').show();
+	//$('#greeting').show();
 	$('#tableContainer').hide();
 	$('#pageTitle').text("Home");
+	if (!signedIn) {
+		$('#greeting').show();
+	}
+	else {$('#Home').show();}
 
 	$("#homePage").css('color', '#009688');
 	$("#yourPlantsPage").css('color', '#484848');
 	$("#aboutPage").css('color', '#484848');
 });
 
+$("#login-password").keypress(function(e){
+	if (e.keyCode == 13) {
+		var email = $("#login-email").val();
+		var password = $("#login-password").val();
+		login(email, password);
+	}
+})
+
+$("#login-email").keypress(function(e){
+	if (e.keyCode == 13) {
+		var email = $("#login-email").val();
+		var password = $("#login-password").val();
+		login(email, password);
+	}
+})
+
+$("#RegisterFromMain").click(function(){
+	register();
+})
+
+function login(email, password) {
+	//var email = $("#login-email").val();
+	//var password = $("#login-password").val();
+	//if(email && password){
+			//Buffer Animation
+	$("#login-progress").show();
+	$('#register-button').hide();
+	$("#login-button").hide();
+	$("#login-error").text("");
+		//Sign In Function
+	firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error){
+		firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+		//Reset Login Page
+		$("#login-error").show().text(error.message);
+		$("#login-progress").hide();
+		$('#register-button').show();
+		$("#login-button").show();
+	});
+	
+}
+
+function register() {
+    $(".login-cover").show();
+    $("#login-progress").hide();
+	$('#register-button').show();
+	$("#login-button").show();
+	$("#login-email").val("");
+	$("#login-password").val("");
+    var dialog = document.querySelector('#login-dialog');
+    if(!dialog.showModal){
+    	dialogPolyfill.registerDialog(dialog);
+    }
+    dialog.showModal();
+}
