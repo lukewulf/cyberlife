@@ -762,7 +762,14 @@ function login(email, password) {
 		$('#register-button').show();
 		$("#login-button").show();
 	});
-	
+
+	$('#about').hide();
+	$('#Home').show();
+	$('#tableContainer').hide();
+	$('#pageTitle').text("Home");
+	$("#homePage").css('color', '#009688');
+	$("#yourPlantsPage").css('color', '#484848');
+	$("#aboutPage").css('color', '#484848');
 }
 
 function register() {
