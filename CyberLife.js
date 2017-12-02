@@ -158,7 +158,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
   	$("#homePage").css('color', '#009688');
 	$("#yourPlantsPage").css('color', '#484848');
-	$("#aboutPage").css('color', '#484848');git
+	$("#aboutPage").css('color', '#484848');
 	$("pageTitle").text("Home");
 	$("#pot-table-2").hide();
 
@@ -709,21 +709,6 @@ $("#yourPlantsPage").click(function(){
 	$("#aboutPage").css('color', '#484848');
 });
 
-$("#homePage").click(function(){
-	$('#about').hide();
-	//$('#greeting').show();
-	$('#tableContainer').hide();
-	$('#pageTitle').text("Home");
-	if (!signedIn) {
-		$('#greeting').show();
-	}
-	else {$('#Home').show();}
-
-	$("#homePage").css('color', '#009688');
-	$("#yourPlantsPage").css('color', '#484848');
-	$("#aboutPage").css('color', '#484848');
-});
-
 $("#login-password").keypress(function(e){
 	if (e.keyCode == 13) {
 		var email = $("#login-email").val();
@@ -762,7 +747,7 @@ function login(email, password) {
 		$('#register-button').show();
 		$("#login-button").show();
 	});
-
+	
 	$('#about').hide();
 	$('#Home').show();
 	$('#tableContainer').hide();
@@ -786,3 +771,16 @@ function register() {
     dialog.showModal();
 }
 
+function toHomePage(){
+	$('#about').hide();
+	$('#tableContainer').hide();
+	$('#pageTitle').text("Home");
+	if (!signedIn) {
+		$('#greeting').show();
+	}
+	else {$('#Home').show();}
+
+	$("#homePage").css('color', '#009688');
+	$("#yourPlantsPage").css('color', '#484848');
+	$("#aboutPage").css('color', '#484848');
+}
