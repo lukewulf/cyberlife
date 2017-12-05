@@ -188,16 +188,18 @@ html, body{
 /* Home Page Style */
 #greeting{
 	color: #484848;
-	padding-top: 175px;
+	padding-top: 5%;
+	width: 60%;
 	margin-left: 100px;
 	display: flex;
 }
 
 #greetingMessage{
-	font-size: 80px;
+	font-size: 100px;
 	font-style: bolder;
 	font-family: 'Roboto', sans-serif;
 	line-height: 125%;
+	margin-bottom: 35px;
 }
 
 /*About Page Style*/
