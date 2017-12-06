@@ -300,15 +300,15 @@
           <h3 class="paragraphHead">The Team</h3>
           <div class="aboutRow">
             <div class="aboutColumn">
-              <img src="https://image.flaticon.com/icons/png/128/149/149452.png">
+              <img class="profile" src="IMG_0598.jpg">
               <h4>Luke Wulf</h4>
-              <h6>Lead Web Developer</h6>
+              <h6>Full Stack Developer</h6>
               <p>Luke drives CyberLife's general direction and works as the lead developer for the webpage.  Luke is passionate about finding creative outlets in normal life.</p>
               <p class="gradYear">UCSD Computer Engineering</p>
               <p class="gradYear">Class of 2019</p>     
             </div>
             <div class="aboutColumn">
-              <img src="https://image.flaticon.com/icons/png/128/149/149452.png">
+              <img class="profile" src="IMG_0595.jpg">
               <h4>Kevin Tain</h4>
               <h6>[Job Description]</h6>
               <p>Nullam lobortis orci in dui congue, posuere ultrices arcu aliquet. Nullam sollicitudin varius urna vel facilisis. Vestibulum mattis eget ipsum et blandit. Ut rhoncus bibendum nisl, a</p>
@@ -316,7 +316,7 @@
               <p class="gradYear">Class of 2018</p>     
             </div>
             <div class="aboutColumn">
-              <img src="https://image.flaticon.com/icons/png/128/149/149452.png">
+              <img class="profile" src="https://image.flaticon.com/icons/png/128/149/149452.png">
               <h4>Umut Fidan</h4>
               <h6>[Job Description]</h6>
               <p>n lacinia purus sodales, cursus lorem quis, accumsan velit. Maecenas a maximus justo. Praesent id facilisis nulla, posuere efficitur orci. Vestibulum ante ipsum primis in faucibus orci luctus </p>
@@ -324,9 +324,9 @@
               <p class="gradYear">Class of 2020</p>        
             </div>
             <div class="aboutColumn">
-              <img src="https://image.flaticon.com/icons/png/128/149/149452.png">
+              <img class="profile" src="IMG_0594.jpg">
               <h4>Tara Shamblin</h4>
-              <h6>[Job Description]</h6>
+              <h6>Lead Web Developer</h6>
               <p>Donec et diam vel lectus facilisis rhoncus. Suspendisse tincidunt purus id enim aliquet, a cursus neque dapibus. Aliquam erat volutpat. Nam pretium vulputate magna, eu pellentesque dolor. </p>
               <p class="gradYear">UCSD Electrical Engineering</p>
               <p class="gradYear">Class of 2019</p>               
@@ -344,20 +344,77 @@
 
     <!-- Home Page -->
       <div id="greeting">
-        <div class="column">
+        <div class="column" id="greetingColumn">
          <p id="greetingMessage">Manage Your Plants From Anywhere</p>
           <button id="RegisterFromMain" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--colored">Register a Pot Now</button>
+        </div>
+        <div id="greetingSubHeader">
+          <div class="column-greeting" id="text-column">
+            <div class="section">
+              <!--<h3 class="paragraphHead">About</h3>-->
+              <div id="HomeSubOne" class="homeSubHead">
+                <div id="subHeaderImg1" class="subHeaderImg">
+                  <img src="https://github.com/terraNova97/196Tutorial/raw/master/HomePage.jpg" width="80%">
+                </div>
+                <div id="HomeSubOneText" class="HomeSubText">
+                  <h3 class="paragraphHead" id="subMessage">An Easy Way to Make Some Green</h3>
+                  <h4 class="paragraphHead">- We're talking plants that water themselves -</h4>
+                  <!--<ol>
+                    <li>Activate Your Pot</li>
+                    <li>Set Your Preferences</li>
+                    <li>Let Us Do The Work</li>
+                  </ol>-->
+                  <p id="subHeaderPara" class="aboutParagraph">Activate your pot, set your preferences, and walk away. With CyberLife, anyone can have a green thumb. So go ahead and start that home-grown herb collection. Or add some life to an office or workspace. You’ll always be able to manage your plants no matter where you go. Or you can simply let us. </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!--Home Page once logged in -->
       <div id="Home">
-        <div class="column">
-         <p id="greetingMessage">Home Page</p>
+       <div id="container">
+        <div class="column" id="text-column">
+          <div class="section">
+            <h1 id="about-header">- Welcome -</h1>
+            <h6 id="about-subheader">Setting Up Your Pots</h6>
+            <!--<h3 class="paragraphHead">About</h3>-->
+            <div id="HomeSubOne" class="homeSubHead">
+              <div id="subHeaderImg1" class="subHeaderImg">
+                <img src="https://s-media-cache-ak0.pinimg.com/originals/33/a6/7d/33a67dbbfecc6f0b982fdfded6a4b11c.jpg" width="80%">
+              </div>
+              <div id="HomeSubOneText" class="HomeSubText">
+                <h4 class="paragraphHead">Activate Your Pot</h4>
+                <p class="aboutParagraph">
+                Each CyberLife pot comes with a unique pot ID, so that it can be controlled individually. Find yours, and head on over to the "Your Plants" page, where you can enter in your unique ID and begin using your pot!</p>
+              </div>
+            </div>
+            <div id="HomeSubTwo" class="homeSubHead">
+              <div id="HomeSubTwoText" class="HomeSubText">
+                <h4 class="paragraphHead">Set Your Preferences</h4>
+                <p class="aboutParagraph">
+                  Whether you want to water your plants instantly and on the go, or water them on a more regular basis, you can do both by setting your preferences under the "Your Plants" Page. You can even let us do the work for you by setting your plants to be watered automatically when we detect that the soil is too dry. And if you want to spruce your plant up a bit, all pots come with an added light fixture, which you can also enable under the "Your Plants" page.</p>
+              </div>
+              <div id="subHeaderImg2" class="subHeaderImg">
+                <img src="http://iconshow.me/media/images/Mixed/small-n-flat-icon/png2/512/-cogs.png" width="80%" id="SetPreferenceImg">
+              </div>
+            </div>
+            <div id="HomeSubThree" class="homeSubHead">
+              <div id="subHeaderImg3" class="subHeaderImg">
+                <img src="http://superawesomevectors.com/wp-content/uploads/2017/04/potted-plant-flat-vector-800x566.jpg" width="80%">
+              </div>
+              <div id="HomeSubThreeText" class="HomeSubText">
+                <h4 class="paragraphHead">Watch Them Grow</h4>
+                <p class="aboutParagraph">
+                After enabling your settings under the "Your Plants" page, sit back and watch your plants grow! And if you're new to the gardening scene, cheers to your new green thumb!</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-</div>
-
+    </div>
+  </div>
 
 
 
